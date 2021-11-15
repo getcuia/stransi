@@ -1,3 +1,3 @@
 # unsi
 
-Parse ANSI escape sequences
+A lightweight ANSI escape sequence parser.
