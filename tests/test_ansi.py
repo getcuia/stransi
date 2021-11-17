@@ -1,4 +1,4 @@
-"""Tests for strings containing ANSI escape sequences."""
+"""Tests for the Ansi class."""
 
 from typing import Text
 
@@ -42,3 +42,8 @@ def test_ansi_can_be_iterated():
         "World!",
         Attribute.NORMAL,
     ]
+
+
+def test_ansi_has_pattern():
+    """Ensure the class has a (constant) pattern property."""
+    assert hasattr(Ansi, "PATTERN")
