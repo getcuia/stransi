@@ -21,22 +21,7 @@ class Escape(Text):
         return f"{self.__class__.__name__}({super().__repr__()})"
 
     def tokens(self) -> Iterable[Token]:
-        r"""
-        Yield all tokens in this chunk.
-
-        Examples
-        --------
-        >>> list(Escape("\033[m").tokens())
-        [Token(kind='m', data=0)]
-        >>> list(Escape("\x1b[1;31m").tokens())
-        [Token(kind='m', data=1), Token(kind='m', data=31)]
-        >>> list(Escape("\x1b[38;2;30;60;90m").tokens())  # doctest: +NORMALIZE_WHITESPACE
-        [Token(kind='m', data=38),
-            Token(kind='m', data=2),
-            Token(kind='m', data=30),
-            Token(kind='m', data=60),
-            Token(kind='m', data=90)]
-        """
+        """Yield individual tokens from the escape sequence."""
         assert isescape(self), f"{self!r} is not an escape sequence"
 
         kind = self[-1]
@@ -47,7 +32,7 @@ class Escape(Text):
             yield Token(kind=kind, data=0)
 
     def escapables(self) -> Iterable[Escapable]:
-        """
+        r"""
         Decode a string of tokens into escapable objects.
 
         Examples
