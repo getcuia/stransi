@@ -48,35 +48,37 @@ class Escape(Text):
         --------
         >>> list(Escape("\x1b[1m").instructions())
         [SetAttribute(attribute=<Attribute.BOLD: 1>)]
-        >>> list(Escape("\x1b[5;44m").instructions())
-        [SetAttribute(attribute=<Attribute.BLINK: 5>), SetColor(role=<ColorRole.BACKGROUND: 40>, color=Ansi256(4))]
+        >>> list(Escape("\x1b[5;44m").instructions())  # doctest: +NORMALIZE_WHITESPACE
+        [SetAttribute(attribute=<Attribute.BLINK: 5>),
+         SetColor(role=<ColorRole.BACKGROUND: 40>,
+         color=Ansi256(4))]
         """
         tokens = self.tokens()
-        while t := next(tokens, None):
-            if not t.issgr():
+        while token := next(tokens, None):
+            if not token.issgr():
                 # We only support SGR (Select Graphic Rendition)
-                yield Unsupported(t)
+                yield Unsupported(token)
                 continue
 
-            if t.data in self.SUPPORTED_ATTRIBUTE_CODES:
-                yield SetAttribute(Attribute(t.data))
+            if token.data in self.SUPPORTED_ATTRIBUTE_CODES:
+                yield SetAttribute(Attribute(token.data))
                 continue
 
-            if 30 < t.data < 38:
+            if 30 < token.data < 38:
                 # Foreground colors
                 yield SetColor(
                     role=ColorRole.FOREGROUND,
-                    color=ochre.Ansi256(t.data - ColorRole.FOREGROUND.value),
+                    color=ochre.Ansi256(token.data - ColorRole.FOREGROUND.value),
                 )
                 continue
 
-            if 40 < t.data < 48:
+            if 40 < token.data < 48:
                 # Foreground colors
                 yield SetColor(
                     role=ColorRole.BACKGROUND,
-                    color=ochre.Ansi256(t.data - ColorRole.BACKGROUND.value),
+                    color=ochre.Ansi256(token.data - ColorRole.BACKGROUND.value),
                 )
                 continue
 
             # Unsupported SGR code
-            yield Unsupported(t)
+            yield Unsupported(token)

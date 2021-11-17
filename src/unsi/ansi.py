@@ -19,8 +19,13 @@ class Ansi(Text):
     >>> s = Ansi("\x1b[1;31mHello\x1b[m, world!")
     >>> list(s.escapes())
     [Escape('\x1b[1;31m'), 'Hello', Escape('\x1b[m'), ', world!']
-    >>> list(s.instructions())
-    [SetAttribute(attribute=<Attribute.BOLD: 1>), SetColor(role=<ColorRole.FOREGROUND: 30>, color=Ansi256(1)), 'Hello', SetAttribute(attribute=<Attribute.NORMAL: 0>), ', world!']
+    >>> list(s.instructions())  # doctest: +NORMALIZE_WHITESPACE
+    [SetAttribute(attribute=<Attribute.BOLD: 1>),
+     SetColor(role=<ColorRole.FOREGROUND: 30>,
+     color=Ansi256(1)),
+     'Hello',
+     SetAttribute(attribute=<Attribute.NORMAL: 0>),
+     ', world!']
     """
 
     PATTERN = re.compile(r"(\N{ESC}\[[\d;]*[a-zA-Z])")

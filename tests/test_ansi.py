@@ -9,28 +9,28 @@ from unsi import Ansi, Attribute, ColorRole, SetAttribute, SetColor
 
 def test_ansi_is_a_string():
     """Ansi is a string."""
-    s = Ansi("Hello, world!")
+    ansi = Ansi("Hello, world!")
 
-    assert isinstance(s, Ansi)
-    assert isinstance(s, Text)
-    assert s == "Hello, world!"
+    assert isinstance(ansi, Ansi)
+    assert isinstance(ansi, Text)
+    assert ansi == "Hello, world!"
 
 
 def test_ansi_can_be_concatenated():
     """Ansi can be concatenated."""
-    s = Ansi("Hello, ") + Ansi("world!")
+    ansi = Ansi("Hello, ") + Ansi("world!")
 
     # TODO: should we override __add__?
     # assert not isinstance(s, Ansi)
-    assert isinstance(s, Text)
-    assert s == "Hello, world!"
+    assert isinstance(ansi, Text)
+    assert ansi == "Hello, world!"
 
 
 def test_ansi_can_be_iterated():
     """Ansi can be iterated."""
-    s = Ansi("\N{ESC}[0;31;1mHello\x1b[m, \x1B[32mWorld!\N{ESC}[0m")
+    ansi = Ansi("\N{ESC}[0;31;1mHello\x1b[m, \x1B[32mWorld!\N{ESC}[0m")
 
-    assert list(s.instructions()) == [
+    assert list(ansi.instructions()) == [
         SetAttribute(Attribute.NORMAL),
         SetColor(role=ColorRole.FOREGROUND, color=ochre.Ansi256(1)),
         SetAttribute(Attribute.BOLD),
