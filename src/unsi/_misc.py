@@ -13,13 +13,17 @@ def _isplit(
     Split text into parts separated by the given pattern.
 
     This yields the text before the first match, then the match, then the text
-    after the match and so on. In any case, empty strings are never yielded.
+    after the match and so on. In any case, empty strings are *never* yielded.
 
-    If `include_separators` is False (the default), the separator is not
+    If `include_separators` is False (the default), separators are not
     included in the result.
 
     Examples
     --------
+    >>> list(_isplit('a b  c', ' '))
+    ['a', 'b', 'c']
+    >>> list(_isplit('a b  c', ' ', include_separators=True))
+    ['a', ' ', 'b', ' ', ' ', 'c']
     >>> list(_isplit('a b  c', r'\s+'))
     ['a', 'b', 'c']
     >>> list(_isplit('a b  c', r'\s+', include_separators=True))
@@ -28,20 +32,19 @@ def _isplit(
     if isinstance(pattern, Text):
         pattern = re.compile(pattern)
 
-    start, end = 0, 0
-    for match in pattern.finditer(text):
-        # Yield the text before the match.
-        end = match.start()
-        if piece := text[start:end]:
+    prev_end = 0
+    for separator in pattern.finditer(text):
+        # Yield the text before separator.
+        if piece := text[prev_end : separator.start()]:
             yield piece
 
-        # Yield the match.
-        if include_separators and (piece := match.group(0)):
+        # Yield separator.
+        if include_separators and (piece := separator.group(0)):
             yield piece
 
         # Update the start position.
-        start = match.end()
+        prev_end = separator.end()
 
-    # Yield the text after the last match.
-    if piece := text[start:]:
+    # Yield the text after the last separator.
+    if piece := text[prev_end:]:
         yield piece
