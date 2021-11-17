@@ -35,11 +35,16 @@ class Escape(Text):
             Token(kind='m', data=60),
             Token(kind='m', data=90)]
         """
-        # if not self.startswith("\N{ESC}["):
-        #     raise ValueError(f"{self!r} is not an escape sequence")
+        assert isescape(self), f"{self!r} is not an escape sequence"
+
         kind = self[-1]
         if params := self[2:-1]:
             for param in _isplit(params, SEPARATOR):
                 yield Token(kind=kind, data=int(param))
         else:
             yield Token(kind=kind, data=0)
+
+
+def isescape(text: Text) -> bool:
+    """Return True if text is an ANSI escape sequence."""
+    return text.startswith("\N{ESC}[")

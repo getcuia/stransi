@@ -6,9 +6,9 @@ import re
 from typing import Iterable, Text
 
 from ._misc import _isplit
-from .escape import Escape
+from .escape import Escape, isescape
 from .escape_sequence import decode
-from .token import GROUNDS, Escapable, Token
+from .token import Escapable, Token
 
 PATTERN = re.compile(r"(\N{ESC}\[[\d;]*[a-zA-Z])")
 
@@ -20,7 +20,7 @@ class Ansi(Text):
         """Return a string representation of object."""
         return f"{self.__class__.__name__}({super().__repr__()})"
 
-    def escapes(self) -> Iterable[Text | Token]:
+    def escapes(self) -> Iterable[Escape | Text]:
         r"""
         Yield ANSI escape sequences from this string.
 
@@ -29,21 +29,20 @@ class Ansi(Text):
 
         Examples
         --------
-        >>> text = Ansi("I say: \x1b[38;2;0;255;0mhello, green!\x1b[m")
+        >>> text = Ansi("I say: \x1b[38;2;0;255;0mhello, green!\x1b[m\x1b[m")
         >>> list(text.escapes())  # doctest: +NORMALIZE_WHITESPACE
         ['I say: ',
         Escape('\x1b[38;2;0;255;0m'),
         'hello, green!',
+        Escape('\x1b[m'),
         Escape('\x1b[m')]
         """
-        # TODO: use a map
-        for piece in _isplit(self, PATTERN, include_separators=True):
-            if piece.startswith("\N{ESC}"):
-                yield Escape(piece)
-            elif piece:
-                yield piece
+        return map(
+            lambda piece: piece if not isescape(piece) else Escape(piece),
+            _isplit(self, PATTERN, include_separators=True),
+        )
 
-    def tokens(self) -> Iterable[Text | Token]:
+    def tokens(self) -> Iterable[Token | Text]:
         r"""
         Tokenize ANSI escape sequences from this string.
 
@@ -63,14 +62,13 @@ class Ansi(Text):
         'hello, green!',
         Token(kind='m', data=0)]
         """
-        # TODO: use a map
         for escape in self.escapes():
             if isinstance(escape, Escape):
                 yield from escape.tokens()
             else:
                 yield escape
 
-    def escapables(self) -> Iterable[Text | Escapable]:
+    def escapables(self) -> Iterable[Escapable | Text]:
         r"""
         Parse ANSI escape sequences from a string.
 
@@ -123,3 +121,9 @@ class Ansi(Text):
 
         if ts:
             yield from decode(ts)
+
+
+if __name__ == "__main__":
+    s = Ansi("\N{ESC}[0;31mHello\x1b[m, \x1B[1;32mWorld!\N{ESC}[0m")
+    for x in s.escapables():
+        print(repr(x))

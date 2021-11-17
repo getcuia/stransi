@@ -10,6 +10,7 @@ import ochre
 from .token import GROUNDS, Attr, Back, Escapable, Fore, Ground, Token
 
 
+# TODO: this should go to a dedicated object
 def decode(ts: Iterable[Token]) -> Iterable[Escapable]:
     """
     Decode a string of tokens into objects if possible, otherwise yield the token as-is.
