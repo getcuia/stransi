@@ -7,7 +7,7 @@ from typing import Iterable, Pattern, Text
 
 
 def _isplit(
-    text: Text, pattern: Pattern[Text] | Text, include_separators: bool = False
+    text: Text, pattern: Pattern[Text], include_separators: bool = False
 ) -> Iterable[Text]:
     r"""
     Split text into parts separated by the given pattern.
@@ -29,11 +29,8 @@ def _isplit(
     >>> list(_isplit('a b  c', r'\s+', include_separators=True))
     ['a', ' ', 'b', '  ', 'c']
     """
-    if isinstance(pattern, Text):
-        pattern = re.compile(pattern)
-
     prev_end = 0
-    for separator in pattern.finditer(text):
+    for separator in re.finditer(pattern, text):
         # Yield the text before separator.
         if piece := text[prev_end : separator.start()]:
             yield piece

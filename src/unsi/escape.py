@@ -10,11 +10,11 @@ import ochre
 from ._misc import _isplit
 from .token import GROUNDS, Attribute, Back, Escapable, Fore, Ground, Token
 
-SEPARATOR = re.compile(r";")
-
 
 class Escape(Text):
     """A single ANSI escape sequence."""
+
+    SEPARATOR = re.compile(r";")
 
     def __repr__(self) -> Text:
         """Return a string representation of the object."""
@@ -41,7 +41,7 @@ class Escape(Text):
 
         kind = self[-1]
         if params := self[2:-1]:
-            for param in _isplit(params, SEPARATOR):
+            for param in _isplit(params, self.SEPARATOR):
                 yield Token(kind=kind, data=int(param))
         else:
             yield Token(kind=kind, data=0)
