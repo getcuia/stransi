@@ -91,21 +91,21 @@ class Ansi(Text):
         ... )
         >>> for code in s.escapables():
         ...     code  # doctest: +NORMALIZE_WHITESPACE
-        <Attr.NORMAL: 0>
+        <Attribute.NORMAL: 0>
         Fore(color=RGB(red=1.0, green=0.0, blue=0.0))
         'Hello'
-        <Attr.NORMAL: 0>
+        <Attribute.NORMAL: 0>
         ', '
-        <Attr.BOLD: 1>
+        <Attribute.BOLD: 1>
         Fore(color=RGB(red=0.0, green=1.0, blue=0.0))
         'World!'
-        <Attr.NORMAL: 0>
+        <Attribute.NORMAL: 0>
         >>> s = Ansi("\x1B[38;2;0;255;0mHello, green!\x1b[m")
         >>> for code in s.escapables():
         ...     code
         Fore(color=RGB(red=0.0, green=1.0, blue=0.0))
         'Hello, green!'
-        <Attr.NORMAL: 0>
+        <Attribute.NORMAL: 0>
         """
         ts: list[Token] = []
         tokens = iter(self.tokens())
@@ -121,9 +121,3 @@ class Ansi(Text):
 
         if ts:
             yield from decode(ts)
-
-
-if __name__ == "__main__":
-    s = Ansi("\N{ESC}[0;31mHello\x1b[m, \x1B[1;32mWorld!\N{ESC}[0m")
-    for x in s.escapables():
-        print(repr(x))

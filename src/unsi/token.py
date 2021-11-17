@@ -146,13 +146,13 @@ def encode(data: Escapable | Iterable[Token]) -> Iterable[Token]:
 
     Examples
     --------
-    >>> list(encode(Attr.BOLD))
+    >>> list(encode(Attribute.BOLD))
     [Token(kind='m', data=1)]
-    >>> list(encode(encode(Attr.BOLD))) == list(encode(Attr.BOLD))
+    >>> list(encode(encode(Attribute.BOLD))) == list(encode(Attribute.BOLD))
     True
     """
     # TODO: dispatch table!
-    if isinstance(data, Attr):
+    if isinstance(data, Attribute):
         yield Token(kind="m", data=data.value)
     if isinstance(data, Ground):
         base = 40 if isinstance(data, Back) else 30
@@ -184,6 +184,10 @@ def encode(data: Escapable | Iterable[Token]) -> Iterable[Token]:
         yield data
     if isinstance(data, Iterable):
         yield from data
+
+
+# TODO: create an hierarchy of classes for attributes and colors that is
+# generic on a type parameter.
 
 
 @dataclass(frozen=True)
@@ -239,17 +243,17 @@ GROUNDS = {
 }
 
 
-class Attr(Escapable, Enum):
+class Attribute(Escapable, Enum):
     r"""
     ANSI escape sequence text style attributes.
 
     Examples
     --------
-    >>> Attr.BOLD
-    <Attr.BOLD: 1>
-    >>> list(encode(Attr.BOLD))
+    >>> Attribute.BOLD
+    <Attribute.BOLD: 1>
+    >>> list(encode(Attribute.BOLD))
     [Token(kind='m', data=1)]
-    >>> escape(encode(Attr.BOLD))
+    >>> escape(encode(Attribute.BOLD))
     '\x1b[1m'
     """
 

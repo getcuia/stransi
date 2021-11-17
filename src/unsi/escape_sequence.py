@@ -7,7 +7,7 @@ from typing import Iterable, Iterator, Type
 
 import ochre
 
-from .token import GROUNDS, Attr, Back, Escapable, Fore, Ground, Token
+from .token import GROUNDS, Attribute, Back, Escapable, Fore, Ground, Token
 
 
 # TODO: this should go to a dedicated object
@@ -18,7 +18,7 @@ def decode(ts: Iterable[Token]) -> Iterable[Escapable]:
     Examples
     --------
     >>> list(decode([Token(kind="m", data=1)]))
-    [<Attr.BOLD: 1>]
+    [<Attribute.BOLD: 1>]
     >>> list(decode([Token(kind="m", data=31)]))  # doctest: +SKIP
     [Fore(color=Color(red=1.0, green=0.5826106699754192, blue=0.5805635742506021))]
     """
@@ -30,7 +30,7 @@ def decode(ts: Iterable[Token]) -> Iterable[Escapable]:
             if t.data < 30 or 50 <= t.data < 76:
                 # Parse an SGR attribute token
                 try:
-                    yield Attr(t.data)
+                    yield Attribute(t.data)
                 except ValueError:
                     yield t
             elif 30 <= t.data < 50 or 90 <= t.data < 108:
