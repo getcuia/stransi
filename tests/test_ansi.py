@@ -17,6 +17,15 @@ def test_ansi_is_a_string():
     assert s == "Hello, world!"
 
 
+def test_ansi_can_be_concatenated():
+    """Ansi can be concatenated."""
+    s = Ansi("Hello, ") + Ansi("world!")
+
+    # assert not isinstance(s, Ansi)
+    assert isinstance(s, Text)
+    assert s == "Hello, world!"
+
+
 def test_ansi_can_be_iterated():
     """Ansi can be iterated."""
     s = Ansi("\N{ESC}[0;31;1mHello\x1b[m, \x1B[32mWorld!\N{ESC}[0m")
