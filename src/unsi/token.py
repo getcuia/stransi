@@ -45,8 +45,16 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Iterable, Iterator, Text, Type
 
-from ..color import BLACK, BLUE, CYAN, GREEN, MAGENTA, RED, WHITE, YELLOW, Color
+import ochre
 
+BLACK = ochre.Ansi256(0)
+RED = ochre.Ansi256(1)
+GREEN = ochre.Ansi256(2)
+YELLOW = ochre.Ansi256(3)
+BLUE = ochre.Ansi256(4)
+MAGENTA = ochre.Ansi256(5)
+CYAN = ochre.Ansi256(6)
+WHITE = ochre.Ansi256(7)
 
 
 class Escapable:
@@ -247,7 +255,7 @@ def encode(data: Escapable | Iterable[Token]) -> Iterable[Token]:
 class Ground(Escapable):
     """A ground color."""
 
-    color: Color
+    color: ochre.Color
 
 
 @dataclass(frozen=True)
@@ -257,7 +265,7 @@ class Fore(Ground):
 
     Examples
     --------
-    >>> Fore(RED)
+    >>> Fore(RED)  # doctest: +SKIP
     Fore(color=Color(red=1.0, green=0.5826106699754192, blue=0.5805635742506021))
     """
 
@@ -269,7 +277,7 @@ class Back(Ground):
 
     Examples
     --------
-    >>> Back(RED)
+    >>> Back(RED)  # doctest: +SKIP
     Back(color=Color(red=1.0, green=0.5826106699754192, blue=0.5805635742506021))
     """
 

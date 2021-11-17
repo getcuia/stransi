@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import re
-from typing import Iterable, Text
+
+import ochre
 
 from ._misc import _isplit
 from .escape import Escape
