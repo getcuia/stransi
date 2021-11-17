@@ -16,6 +16,33 @@ PATTERN = re.compile(r"(\N{ESC}\[[\d;]*[a-zA-Z])")
 class Ansi(Text):
     """A string that is aware of its own embedded ANSI escape sequences."""
 
+    def __repr__(self) -> Text:
+        """Return a string representation of object."""
+        return f"{self.__class__.__name__}({super().__repr__()})"
+
+    def escapes(self) -> Iterable[Text | Token]:
+        r"""
+        Yield ANSI escape sequences from this string.
+
+        This yields strings and escape sequences in the order they appear in
+        the input.
+
+        Examples
+        --------
+        >>> text = Ansi("I say: \x1b[38;2;0;255;0mhello, green!\x1b[m")
+        >>> list(text.escapes())  # doctest: +NORMALIZE_WHITESPACE
+        ['I say: ',
+        Escape('\x1b[38;2;0;255;0m'),
+        'hello, green!',
+        Escape('\x1b[m')]
+        """
+        # TODO: use a map
+        for piece in _isplit(self, PATTERN, include_separators=True):
+            if piece.startswith("\N{ESC}"):
+                yield Escape(piece)
+            elif piece:
+                yield piece
+
     def tokens(self) -> Iterable[Text | Token]:
         r"""
         Tokenize ANSI escape sequences from this string.
@@ -36,13 +63,12 @@ class Ansi(Text):
         'hello, green!',
         Token(kind='m', data=0)]
         """
-        for piece in _isplit(self, PATTERN, include_separators=True):
-            if piece:
-                # TODO: redo this iterating over escapes
-                if piece.startswith("\N{ESC}"):
-                    yield from Escape(piece).tokens()
-                else:
-                    yield piece
+        # TODO: use a map
+        for escape in self.escapes():
+            if isinstance(escape, Escape):
+                yield from escape.tokens()
+            else:
+                yield escape
 
     def escapables(self) -> Iterable[Text | Escapable]:
         r"""
@@ -83,12 +109,6 @@ class Ansi(Text):
         'Hello, green!'
         <Attr.NORMAL: 0>
         """
-        if self.tokens is None:
-            raise RuntimeError(
-                "Parser has not been tokenized. "
-                "tokenize() must be called before parse()"
-            )
-
         ts: list[Token] = []
         tokens = iter(self.tokens())
         while t := next(tokens, None):

@@ -14,6 +14,10 @@ SEPARATOR = re.compile(r";")
 class Escape(Text):
     """A single ANSI escape sequence."""
 
+    def __repr__(self) -> Text:
+        """Return a string representation of object."""
+        return f"{self.__class__.__name__}({super().__repr__()})"
+
     def tokens(self) -> Iterable[Token]:
         r"""
         Parse a string into tokens if possible, otherwise yield the string as-is.
@@ -31,8 +35,8 @@ class Escape(Text):
             Token(kind='m', data=60),
             Token(kind='m', data=90)]
         """
-        if not self.startswith("\N{ESC}["):
-            raise ValueError(f"{self!r} is not an escape sequence")
+        # if not self.startswith("\N{ESC}["):
+        #     raise ValueError(f"{self!r} is not an escape sequence")
         kind = self[-1]
         if params := self[2:-1]:
             for param in _isplit(params, SEPARATOR):
