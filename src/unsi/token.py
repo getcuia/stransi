@@ -43,7 +43,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Iterable, Iterator, Text, Type
+from typing import Iterable, Text
 
 import ochre
 
@@ -65,7 +65,7 @@ class Escapable:
     base class for other classes.
     """
 
-    def __str__(self) -> str:
+    def __str__(self) -> Text:
         """Return the ANSI escape sequence for this object."""
         return escape(encode(self))
 

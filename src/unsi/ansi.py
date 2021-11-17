@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from typing import Iterable, Iterator, Text, Type
 
 import ochre
 
@@ -13,7 +14,7 @@ from .token import Token
 PATTERN = re.compile(r"(\N{ESC}\[[\d;]*[a-zA-Z])")
 
 
-class Ansi(str):
+class Ansi(Text):
     """A string that is aware of its own embedded ANSI escape sequences."""
 
     def tokens(self) -> Iterable[Text | Token]:

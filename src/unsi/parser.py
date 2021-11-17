@@ -53,7 +53,7 @@ let's talk about it.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Iterable, Iterator, Optional, Text
+from typing import Iterable, Optional, Text
 
 from . import Ansi
 from .token import Escapable, Token, decode

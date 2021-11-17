@@ -11,7 +11,7 @@ from .token import Token
 SEPARATOR = re.compile(r";")
 
 
-class Escape(str):
+class Escape(Text):
     """A single ANSI escape sequence."""
 
     def parse(text: Text) -> Iterable[Text | Token]:
