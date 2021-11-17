@@ -37,44 +37,7 @@ class Ansi(Text):
                 yield escape
 
     def escapables(self) -> Iterable[Escapable | Text]:
-        r"""
-        Parse ANSI escape sequences from a string.
-
-        This yields strings and attributes in order they appear in the input.
-        Only a subset of the ANSI escape sequences are supported, namely a subset of
-        the SGR (Select Graphic Rendition) escape sequences.
-        If an escape sequence is not supported, it is yielded separately as a
-        non-parsed Token.
-
-        A SGR escape sequence is a sequence that starts with an Control Sequence
-        Introducer (CSI) and ends with an `m`.
-        A CSI escape sequence is a sequence that starts with an escape character
-        (`\033` or `\x1B`) followed by an opening bracket (`[` or `\x5B`).
-
-        Examples
-        --------
-        >>> s = Ansi(
-        ...     "\N{ESC}[0;38;2;255;0;0mHello\x1b[m, "
-        ...     "\x1B[1;38;2;0;255;0mWorld!\N{ESC}[0m"
-        ... )
-        >>> for code in s.escapables():
-        ...     code  # doctest: +NORMALIZE_WHITESPACE
-        <Attribute.NORMAL: 0>
-        Fore(color=RGB(red=1.0, green=0.0, blue=0.0))
-        'Hello'
-        <Attribute.NORMAL: 0>
-        ', '
-        <Attribute.BOLD: 1>
-        Fore(color=RGB(red=0.0, green=1.0, blue=0.0))
-        'World!'
-        <Attribute.NORMAL: 0>
-        >>> s = Ansi("\x1B[38;2;0;255;0mHello, green!\x1b[m")
-        >>> for code in s.escapables():
-        ...     code
-        Fore(color=RGB(red=0.0, green=1.0, blue=0.0))
-        'Hello, green!'
-        <Attribute.NORMAL: 0>
-        """
+        """Yield escapables and text in the order they appear."""
         for chunk in self.chunks():
             if isinstance(chunk, TokenChunk):
                 yield from chunk.escapables()
