@@ -38,18 +38,15 @@ Furthermore, the following are mapped to default colors:
 them.
 """
 
+
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
 from enum import Enum
 from typing import Iterable, Iterator, Text, Type
 
-from .._misc import isplit
 from ..color import BLACK, BLUE, CYAN, GREEN, MAGENTA, RED, WHITE, YELLOW, Color
 
-PATTERN = re.compile(r"(\N{ESC}\[[\d;]*[a-zA-Z])")
-SEPARATOR = re.compile(r";")
 
 
 class Escapable:
@@ -91,58 +88,6 @@ class Token(Escapable):
         False
         """
         return self.kind == "m"
-
-
-def tokenize(text: Text) -> Iterator[Text | Token]:
-    r"""
-    Tokenize ANSI escape sequences from a string.
-
-    This yields strings and escape sequences in the order they appear in the input.
-
-    Examples
-    --------
-    >>> text = "I say: \x1b[38;2;0;255;0mhello, green!\x1b[m"
-    >>> list(tokenize(text))  # doctest: +NORMALIZE_WHITESPACE
-    ['I say: ',
-    Token(kind='m', data=38),
-    Token(kind='m', data=2),
-    Token(kind='m', data=0),
-    Token(kind='m', data=255),
-    Token(kind='m', data=0),
-    'hello, green!',
-    Token(kind='m', data=0)]
-    """
-    for piece in isplit(PATTERN, text, include_separators=True):
-        if piece:
-            yield from parse(piece)
-
-
-def parse(text: Text) -> Iterable[Text | Token]:
-    r"""
-    Parse a string into tokens if possible, otherwise yield the string as-is.
-
-    Examples
-    --------
-    >>> list(parse("\033[m"))
-    [Token(kind='m', data=0)]
-    >>> list(parse("\x1b[1;31m"))
-    [Token(kind='m', data=1), Token(kind='m', data=31)]
-    >>> list(parse("\x1b[38;2;30;60;90m"))  # doctest: +NORMALIZE_WHITESPACE
-    [Token(kind='m', data=38),
-        Token(kind='m', data=2),
-        Token(kind='m', data=30),
-        Token(kind='m', data=60),
-        Token(kind='m', data=90)]
-    """
-    if not text.startswith("\N{ESC}["):
-        yield text
-    else:
-        kind = text[-1]
-        if params := text[2:-1]:
-            for param in isplit(SEPARATOR, params):
-                yield Token(kind=kind, data=int(param))
-        else:
-            yield Token(kind=kind, data=0)
 
 
 def escape(ts: Token | Iterable[Token]) -> Text:

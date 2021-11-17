@@ -55,7 +55,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Iterable, Iterator, Optional, Text
 
-from .token import Escapable, Token, decode, tokenize
+from . import Ansi
+from .token import Escapable, Token, decode
 
 
 @dataclass
@@ -73,7 +74,7 @@ class Parser:
         >>> p = Parser()
         >>> p.tokenize("\x1B[38;2;0;255;0mHello, green!\x1b[m")
         """
-        self.tokens = tokenize(text)
+        self.tokens = Ansi(text).tokens()
 
     def parse(self) -> Iterable[Text | Escapable]:
         r"""
