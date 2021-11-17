@@ -7,5 +7,5 @@ __all__ = ["Ansi", "Attribute", "Escape"]
 
 
 from .ansi import Ansi
+from .attribute import Attribute
 from .escape import Escape
-from .token import Attribute

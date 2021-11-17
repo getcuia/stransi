@@ -42,10 +42,11 @@ them.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import Enum
 from typing import Iterable, Text
 
 import ochre
+
+from .attribute import Attribute
 
 BLACK = ochre.Ansi256(0)
 RED = ochre.Ansi256(1)
@@ -98,6 +99,7 @@ class Token(Escapable):
         return self.kind == "m"
 
 
+# TODO: this doesn't belong in this package
 def escape(ts: Token | Iterable[Token]) -> Text:
     r"""
     Return a compact ANSI escape sequence for the given token or tokens.
@@ -140,6 +142,7 @@ def escape(ts: Token | Iterable[Token]) -> Text:
     return f"{res}{kind}"
 
 
+# TODO: this also doesn't belong in this package
 def encode(data: Escapable | Iterable[Token]) -> Iterable[Token]:
     """
     Encode an object into tokens if possible, otherwise yield the object as-is.
@@ -241,27 +244,3 @@ GROUNDS = {
     46: Back(CYAN),
     47: Back(WHITE),
 }
-
-
-class Attribute(Escapable, Enum):
-    r"""
-    ANSI escape sequence text style attributes.
-
-    Examples
-    --------
-    >>> Attribute.BOLD
-    <Attribute.BOLD: 1>
-    >>> list(encode(Attribute.BOLD))
-    [Token(kind='m', data=1)]
-    >>> escape(encode(Attribute.BOLD))
-    '\x1b[1m'
-    """
-
-    NORMAL = 0
-    BOLD = 1
-    FAINT = 2
-    # ITALIC = 3
-    UNDERLINE = 4
-    BLINK = 5
-    #
-    REVERSE = 7

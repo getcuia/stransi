@@ -8,7 +8,8 @@ from typing import Iterable, Iterator, Text, Type
 import ochre
 
 from ._misc import _isplit
-from .token import GROUNDS, Attribute, Back, Escapable, Fore, Ground, Token
+from .attribute import Attribute
+from .token import GROUNDS, Back, Escapable, Fore, Ground, Token
 
 
 class Escape(Text):
