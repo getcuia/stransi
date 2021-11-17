@@ -7,7 +7,7 @@ from typing import Iterable, Text
 
 from ._misc import _isplit
 from .escape import Escape, isescape
-from .token import Escapable
+from .instruction import Instruction
 
 
 class Ansi(Text):
@@ -19,7 +19,7 @@ class Ansi(Text):
     >>> s = Ansi("\x1b[1;31mHello\x1b[m, world!")
     >>> list(s.escapes())
     [Escape('\x1b[1;31m'), 'Hello', Escape('\x1b[m'), ', world!']
-    >>> list(s.escapables())
+    >>> list(s.instructions())
     [<Attribute.BOLD: 1>, Fore(color=Ansi256(1)), 'Hello', <Attribute.NORMAL: 0>, ', world!']
     """
 
@@ -37,11 +37,10 @@ class Ansi(Text):
             else:
                 yield Escape(match)
 
-    # TODO: this method and the Escapable type have ugly names
-    def escapables(self) -> Iterable[Escapable | Text]:
-        """Yield escapables and text in the order they appear."""
+    def instructions(self) -> Iterable[Instruction | Text]:
+        """Yield ANSI instructions and text in the order they appear."""
         for escape in self.escapes():
             if not isinstance(escape, Escape):
                 yield escape
             else:
-                yield from escape.escapables()
+                yield from escape.instructions()

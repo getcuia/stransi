@@ -31,7 +31,7 @@ def test_ansi_can_be_iterated():
     """Ansi can be iterated."""
     s = Ansi("\N{ESC}[0;31;1mHello\x1b[m, \x1B[32mWorld!\N{ESC}[0m")
 
-    assert list(s.escapables()) == [
+    assert list(s.instructions()) == [
         Attribute.NORMAL,
         Fore(color=ochre.Ansi256(1)),
         Attribute.BOLD,

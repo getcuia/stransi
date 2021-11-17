@@ -9,7 +9,8 @@ import ochre
 
 from ._misc import _isplit
 from .attribute import Attribute
-from .token import GROUNDS, Back, Escapable, Fore, Ground, Token
+from .instruction import Instruction
+from .token import GROUNDS, Back, Fore, Ground, Token
 
 
 class Escape(Text):
@@ -32,15 +33,15 @@ class Escape(Text):
         else:
             yield Token(kind=kind, data=0)
 
-    def escapables(self) -> Iterable[Escapable]:
+    def instructions(self) -> Iterable[Instruction]:
         r"""
         Decode a string of tokens into escapable objects.
 
         Examples
         --------
-        >>> list(Escape("\x1b[1m").escapables())
+        >>> list(Escape("\x1b[1m").instructions())
         [<Attribute.BOLD: 1>]
-        >>> list(Escape("\x1b[1;31m").escapables())  # doctest: +SKIP
+        >>> list(Escape("\x1b[1;31m").instructions())  # doctest: +SKIP
         [Fore(color=Color(red=1.0, green=0.5826106699754192, blue=0.5805635742506021))]
         """
         tokens = self.tokens()
