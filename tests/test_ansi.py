@@ -21,6 +21,7 @@ def test_ansi_can_be_concatenated():
     """Ansi can be concatenated."""
     s = Ansi("Hello, ") + Ansi("world!")
 
+    # TODO: should we override __add__?
     # assert not isinstance(s, Ansi)
     assert isinstance(s, Text)
     assert s == "Hello, world!"

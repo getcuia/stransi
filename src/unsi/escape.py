@@ -115,6 +115,7 @@ class Escape(Text):
                 yield t
 
 
+# TODO: remove all occurrences of 'chunk'
 # chunks = iter(self.chunks())
 # while t := next(chunks, None):
 #     if isinstance(t, Token):
