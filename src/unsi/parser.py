@@ -56,14 +56,14 @@ from dataclasses import dataclass
 from typing import Iterable, Optional, Text
 
 from . import Ansi
-from .token import Escapable, Token, decode
+from .token import Token
 
 
 @dataclass
 class Parser:
     """A parser for ANSI escape sequences."""
 
-    tokens: Optional[Iterator[Text | Token]] = None
+    tokens: Optional[Iterable[Text | Token]] = None
 
     def tokenize(self, text: Text) -> None:
         r"""
@@ -75,69 +75,6 @@ class Parser:
         >>> p.tokenize("\x1B[38;2;0;255;0mHello, green!\x1b[m")
         """
         self.tokens = Ansi(text).tokens()
-
-    def parse(self) -> Iterable[Text | Escapable]:
-        r"""
-        Parse ANSI escape sequences from a string.
-
-        This yields strings and attributes in order they appear in the input.
-        Only a subset of the ANSI escape sequences are supported, namely a subset of
-        the SGR (Select Graphic Rendition) escape sequences.
-        If an escape sequence is not supported, it is yielded separately as a
-        non-parsed Token.
-
-        A SGR escape sequence is a sequence that starts with an Control Sequence
-        Introducer (CSI) and ends with an `m`.
-        A CSI escape sequence is a sequence that starts with an escape character
-        (`\033` or `\x1B`) followed by an opening bracket (`[` or `\x5B`).
-
-        Examples
-        --------
-        >>> p = Parser()
-        >>> p.tokenize(
-        ...     "\N{ESC}[0;38;2;255;0;0mHello\x1b[m, "
-        ...     "\x1B[1;38;2;0;255;0mWorld!\N{ESC}[0m"
-        ... )
-        >>> for code in p.parse():
-        ...     code  # doctest: +NORMALIZE_WHITESPACE
-        <Attr.NORMAL: 0>
-        Fore(color=Color(red=1.0, green=0.0, blue=0.0))
-        'Hello'
-        <Attr.NORMAL: 0>
-        ', '
-        <Attr.BOLD: 1>
-        Fore(color=Color(red=0.0, green=1.0, blue=0.0))
-        'World!'
-        <Attr.NORMAL: 0>
-
-        You can use the same parser object more than once:
-
-        >>> p.tokenize("\x1B[38;2;0;255;0mHello, green!\x1b[m")
-        >>> for code in p.parse():
-        ...     code
-        Fore(color=Color(red=0.0, green=1.0, blue=0.0))
-        'Hello, green!'
-        <Attr.NORMAL: 0>
-        """
-        if self.tokens is None:
-            raise RuntimeError(
-                "Parser has not been tokenized. "
-                "tokenize() must be called before parse()"
-            )
-
-        ts: list[Token] = []
-        while t := next(self.tokens, None):
-            if isinstance(t, Token):
-                ts.append(t)
-            else:
-                if ts:
-                    yield from decode(ts)
-                    ts.clear()
-
-                yield t
-
-        if ts:
-            yield from decode(ts)
 
 
 if __name__ == "__main__":
