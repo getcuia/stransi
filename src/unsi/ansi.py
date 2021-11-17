@@ -68,7 +68,7 @@ class Ansi(Text):
             else:
                 yield escape
 
-    def escapables(self) -> Iterable[Escapable | Text]:
+    def __iter__(self) -> Iterable[Escapable | Text]:
         r"""
         Parse ANSI escape sequences from a string.
 
@@ -89,7 +89,7 @@ class Ansi(Text):
         ...     "\N{ESC}[0;38;2;255;0;0mHello\x1b[m, "
         ...     "\x1B[1;38;2;0;255;0mWorld!\N{ESC}[0m"
         ... )
-        >>> for code in s.escapables():
+        >>> for code in s:
         ...     code  # doctest: +NORMALIZE_WHITESPACE
         <Attribute.NORMAL: 0>
         Fore(color=RGB(red=1.0, green=0.0, blue=0.0))
@@ -101,7 +101,7 @@ class Ansi(Text):
         'World!'
         <Attribute.NORMAL: 0>
         >>> s = Ansi("\x1B[38;2;0;255;0mHello, green!\x1b[m")
-        >>> for code in s.escapables():
+        >>> for code in s:
         ...     code
         Fore(color=RGB(red=0.0, green=1.0, blue=0.0))
         'Hello, green!'
