@@ -13,5 +13,7 @@ A lightweight parser for ANSI escape code sequences.
 -   [ ] Escape sequences not supported by the terminal are emitted as token
         objects.
 -   [ ] Keeps track of the current style and colors.
+-   [ ] Works with what most ANSI/Unix terminals understand (xterm, Linux
+        console, GNOME Terminal, etc.)
 -   [ ] Only one dependency: `ochre`.
 -   [ ] Python 3.8+
