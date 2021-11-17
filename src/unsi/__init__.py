@@ -3,7 +3,7 @@
 __version__ = "0.1.0"
 
 
-__all__ = ["Ansi"]
+__all__ = ["Ansi", "Attribute"]
 
 
 from .ansi import Ansi
