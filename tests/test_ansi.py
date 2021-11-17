@@ -4,8 +4,7 @@ from typing import Text
 
 import ochre
 
-from unsi import Ansi, Attribute
-from unsi.token import Fore
+from unsi import Ansi, Attribute, ColorRole, SetAttribute, SetColor
 
 
 def test_ansi_is_a_string():
@@ -32,15 +31,15 @@ def test_ansi_can_be_iterated():
     s = Ansi("\N{ESC}[0;31;1mHello\x1b[m, \x1B[32mWorld!\N{ESC}[0m")
 
     assert list(s.instructions()) == [
-        Attribute.NORMAL,
-        Fore(color=ochre.Ansi256(1)),
-        Attribute.BOLD,
+        SetAttribute(Attribute.NORMAL),
+        SetColor(role=ColorRole.FOREGROUND, color=ochre.Ansi256(1)),
+        SetAttribute(Attribute.BOLD),
         "Hello",
-        Attribute.NORMAL,
+        SetAttribute(Attribute.NORMAL),
         ", ",
-        Fore(color=ochre.Ansi256(2)),
+        SetColor(role=ColorRole.FOREGROUND, color=ochre.Ansi256(2)),
         "World!",
-        Attribute.NORMAL,
+        SetAttribute(Attribute.NORMAL),
     ]
 
 

@@ -1,13 +1,20 @@
-"""ANSI instructions."""
+"""Generic ANSI instructions."""
 
 
-class Instruction:
+from dataclasses import dataclass
+from typing import Generic, TypeVar
+
+from unsi.token import Token
+
+T = TypeVar("T")
+
+
+class Instruction(Generic[T]):
     """An ANSI instruction."""
 
 
-class SetAttribute(Instruction):
-    """Set an attribute."""
+@dataclass
+class Unsupported(Instruction[Token]):
+    """An instruction that we don't support."""
 
-
-class UnsetAttribute(Instruction):
-    """Unset an attribute."""
+    token: Token

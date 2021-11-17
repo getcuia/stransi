@@ -20,7 +20,7 @@ class Ansi(Text):
     >>> list(s.escapes())
     [Escape('\x1b[1;31m'), 'Hello', Escape('\x1b[m'), ', world!']
     >>> list(s.instructions())
-    [<Attribute.BOLD: 1>, Fore(color=Ansi256(1)), 'Hello', <Attribute.NORMAL: 0>, ', world!']
+    [SetAttribute(attribute=<Attribute.BOLD: 1>), SetColor(role=<ColorRole.FOREGROUND: 30>, color=Ansi256(1)), 'Hello', SetAttribute(attribute=<Attribute.NORMAL: 0>), ', world!']
     """
 
     PATTERN = re.compile(r"(\N{ESC}\[[\d;]*[a-zA-Z])")
@@ -34,13 +34,13 @@ class Ansi(Text):
         for match in _isplit(self, self.PATTERN, include_separators=True):
             if not isescape(match):
                 yield match
-            else:
-                yield Escape(match)
+                continue
+            yield Escape(match)
 
     def instructions(self) -> Iterable[Instruction | Text]:
         """Yield ANSI instructions and text in the order they appear."""
         for escape in self.escapes():
             if not isinstance(escape, Escape):
                 yield escape
-            else:
-                yield from escape.instructions()
+                continue
+            yield from escape.instructions()
