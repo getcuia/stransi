@@ -62,10 +62,10 @@ class Escape(_CustomText):
                 continue
 
             if token.data in self.SUPPORTED_COLOR_CODES:
-                if 30 < token.data < 39:
+                if 30 <= token.data <= 38:
                     # Foreground colors
                     role = ColorRole.FOREGROUND
-                elif 40 < token.data < 49:
+                elif 40 <= token.data <= 48:
                     # Background colors
                     role = ColorRole.BACKGROUND
 
