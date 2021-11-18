@@ -80,6 +80,22 @@ def test_ecma48_only_attributes(text: Text, expected: list[Instruction[Attribute
 @pytest.mark.parametrize(
     "text, expected",
     [
+        ("\x1B[22m", [SetAttribute(Attribute.NEITHER_BOLD_NOR_DIM)]),
+        ("\x1B[23m", [SetAttribute(Attribute.NOT_ITALIC)]),
+        ("\x1B[24m", [SetAttribute(Attribute.NOT_UNDERLINE)]),
+        ("\x1B[25m", [SetAttribute(Attribute.NOT_BLINK)]),
+        ("\x1B[27m", [SetAttribute(Attribute.NOT_REVERSE)]),
+        ("\x1B[28m", [SetAttribute(Attribute.NOT_HIDDEN)]),
+    ],
+)
+def test_ecma48_remove_attributes(text: Text, expected: list[Instruction[Attribute]]):
+    """Ensure we can remove attributes as per ECMA-48."""
+    assert _instr(text) == expected
+
+
+@pytest.mark.parametrize(
+    "text, expected",
+    [
         # Regular foreground colors
         ("\x1B[30m", [_fore(ochre.Ansi256(0))]),
         ("\x1B[31m", [_fore(ochre.Ansi256(1))]),
