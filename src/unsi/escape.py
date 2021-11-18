@@ -80,7 +80,7 @@ class Escape(_CustomText):
                         red_token = next(tokens)
                         green_token = next(tokens)
                         blue_token = next(tokens)
-                        color = ochre.Ansi24(
+                        color = ochre.RGB(
                             red_token.data, green_token.data, blue_token.data
                         )
                     else:
