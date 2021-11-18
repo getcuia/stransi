@@ -58,7 +58,7 @@ def test_vt100_escapes(text: Text, expected: list[Instruction[Attribute]]):
 @pytest.mark.parametrize(
     "text, expected",
     [
-        # Foreground colors
+        # Regular foreground colors
         ("\x1B[30m", [_fore(ochre.Ansi256(0))]),
         ("\x1B[31m", [_fore(ochre.Ansi256(1))]),
         ("\x1B[32m", [_fore(ochre.Ansi256(2))]),
@@ -67,7 +67,16 @@ def test_vt100_escapes(text: Text, expected: list[Instruction[Attribute]]):
         ("\x1B[35m", [_fore(ochre.Ansi256(5))]),
         ("\x1B[36m", [_fore(ochre.Ansi256(6))]),
         ("\x1B[37m", [_fore(ochre.Ansi256(7))]),
-        # Background colors
+        # Bright foreground colors
+        ("\x1B[90m", [_fore(ochre.Ansi256(8))]),
+        ("\x1B[91m", [_fore(ochre.Ansi256(9))]),
+        ("\x1B[92m", [_fore(ochre.Ansi256(10))]),
+        ("\x1B[93m", [_fore(ochre.Ansi256(11))]),
+        ("\x1B[94m", [_fore(ochre.Ansi256(12))]),
+        ("\x1B[95m", [_fore(ochre.Ansi256(13))]),
+        ("\x1B[96m", [_fore(ochre.Ansi256(14))]),
+        ("\x1B[97m", [_fore(ochre.Ansi256(15))]),
+        # Regular background colors
         ("\x1B[40m", [_back(ochre.Ansi256(0))]),
         ("\x1B[41m", [_back(ochre.Ansi256(1))]),
         ("\x1B[42m", [_back(ochre.Ansi256(2))]),
@@ -76,6 +85,15 @@ def test_vt100_escapes(text: Text, expected: list[Instruction[Attribute]]):
         ("\x1B[45m", [_back(ochre.Ansi256(5))]),
         ("\x1B[46m", [_back(ochre.Ansi256(6))]),
         ("\x1B[47m", [_back(ochre.Ansi256(7))]),
+        # Bright background colors
+        ("\x1B[100m", [_back(ochre.Ansi256(8))]),
+        ("\x1B[101m", [_back(ochre.Ansi256(9))]),
+        ("\x1B[102m", [_back(ochre.Ansi256(10))]),
+        ("\x1B[103m", [_back(ochre.Ansi256(11))]),
+        ("\x1B[104m", [_back(ochre.Ansi256(12))]),
+        ("\x1B[105m", [_back(ochre.Ansi256(13))]),
+        ("\x1B[106m", [_back(ochre.Ansi256(14))]),
+        ("\x1B[107m", [_back(ochre.Ansi256(15))]),
     ],
 )
 def test_ecma48_4bit_colors(text: Text, expected: list[Instruction[ochre.Color]]):

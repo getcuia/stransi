@@ -25,7 +25,11 @@ class Escape(_CustomText):
 
     SEPARATOR = re.compile(r";")
     SUPPORTED_ATTRIBUTE_CODES: set[int] = set(a.value for a in Attribute)
-    SUPPORTED_COLOR_CODES: set[int] = set(range(30, 39)) | set(range(40, 49))
+    SUPPORTED_FOREGROUND_CODES: set[int] = set(range(30, 39)) | set(range(90, 98))
+    SUPPORTED_BACKGROUND_CODES: set[int] = set(range(40, 49)) | set(range(100, 108))
+    SUPPORTED_COLOR_CODES: set[int] = (
+        SUPPORTED_FOREGROUND_CODES | SUPPORTED_BACKGROUND_CODES
+    )
 
     def tokens(self) -> Iterator[Token]:
         """Yield individual tokens from the escape sequence."""
@@ -62,11 +66,9 @@ class Escape(_CustomText):
                 continue
 
             if token.data in self.SUPPORTED_COLOR_CODES:
-                if 30 <= token.data <= 38:
-                    # Foreground colors
+                if token.data in self.SUPPORTED_FOREGROUND_CODES:
                     role = ColorRole.FOREGROUND
-                elif 40 <= token.data <= 48:
-                    # Background colors
+                elif token.data in self.SUPPORTED_BACKGROUND_CODES:
                     role = ColorRole.BACKGROUND
 
                 if token.data in {38, 48}:
@@ -92,7 +94,12 @@ class Escape(_CustomText):
 
                     # The value of role is the index of the first color in
                     # the corresponding palette, that's why it works.
-                    color = ochre.Ansi256(token.data - role.value)
+                    color_index = token.data - role.value
+                    if token.data >= 90:
+                        # Bright colors
+                        color_index -= 52
+
+                    color = ochre.Ansi256(color_index)
 
                 yield SetColor(role=role, color=color)
                 continue
