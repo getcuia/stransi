@@ -3,6 +3,7 @@
 
 from dataclasses import dataclass
 from enum import Enum
+from typing import Optional
 
 from ochre import Color
 
@@ -24,4 +25,4 @@ class SetColor(Instruction[Color]):
     """An ANSI instruction to set a foreground or background color."""
 
     role: ColorRole
-    color: Color
+    color: Optional[Color] = None

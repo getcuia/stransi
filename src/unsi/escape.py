@@ -24,12 +24,10 @@ class Escape(_CustomText):
     """A single ANSI escape sequence."""
 
     SEPARATOR = re.compile(r";")
-    SUPPORTED_ATTRIBUTE_CODES: set[int] = set(a.value for a in Attribute)
-    SUPPORTED_FOREGROUND_CODES: set[int] = set(range(30, 39)) | set(range(90, 98))
-    SUPPORTED_BACKGROUND_CODES: set[int] = set(range(40, 49)) | set(range(100, 108))
-    SUPPORTED_COLOR_CODES: set[int] = (
-        SUPPORTED_FOREGROUND_CODES | SUPPORTED_BACKGROUND_CODES
-    )
+    ALL_ATTRIBUTE_CODES: set[int] = set(a.value for a in Attribute)
+    ALL_FOREGROUND_CODES: set[int] = set(range(30, 40)) | set(range(90, 98))
+    ALL_BACKGROUND_CODES: set[int] = set(range(40, 50)) | set(range(100, 108))
+    ALL_COLOR_CODES: set[int] = ALL_FOREGROUND_CODES | ALL_BACKGROUND_CODES
 
     def tokens(self) -> Iterator[Token]:
         """Yield individual tokens from the escape sequence."""
@@ -61,14 +59,14 @@ class Escape(_CustomText):
                 yield Unsupported(token)
                 continue
 
-            if token.data in self.SUPPORTED_ATTRIBUTE_CODES:
+            if token.data in self.ALL_ATTRIBUTE_CODES:
                 yield SetAttribute(Attribute(token.data))
                 continue
 
-            if token.data in self.SUPPORTED_COLOR_CODES:
-                if token.data in self.SUPPORTED_FOREGROUND_CODES:
+            if token.data in self.ALL_COLOR_CODES:
+                if token.data in self.ALL_FOREGROUND_CODES:
                     role = ColorRole.FOREGROUND
-                elif token.data in self.SUPPORTED_BACKGROUND_CODES:
+                elif token.data in self.ALL_BACKGROUND_CODES:
                     role = ColorRole.BACKGROUND
 
                 if token.data in {38, 48}:
@@ -89,6 +87,9 @@ class Escape(_CustomText):
                         )
                     else:
                         raise ValueError(f"Unsupported color spec {color_spec_token!r}")
+                elif token.data in {39, 49}:
+                    # Default color
+                    color = None
                 else:
                     # 8-color support
 

@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import Text
+from typing import Optional, Text
 
 import ochre
 import pytest
@@ -22,11 +22,11 @@ def _instr(t):
     return list(Escape(t).instructions())
 
 
-def _fore(color):
+def _fore(color: Optional[ochre.Color] = None):
     return SetColor(ColorRole.FOREGROUND, color)
 
 
-def _back(color):
+def _back(color: Optional[ochre.Color] = None):
     return SetColor(ColorRole.BACKGROUND, color)
 
 
@@ -113,3 +113,9 @@ def test_ecma48_24bit_colors(red: int, green: int, blue: int):
     """Ensure the ECMA-48 24-bit colors are supported."""
     assert _instr(f"\x1B[38;2;{red};{green};{blue}m") == [_fore(_rgb(red, green, blue))]
     assert _instr(f"\x1B[48;2;{red};{green};{blue}m") == [_back(_rgb(red, green, blue))]
+
+
+def test_ecma48_default_colors():
+    """Ensure the ECMA-48 default colors are supported."""
+    assert _instr("\x1B[39m") == [_fore()]
+    assert _instr("\x1B[49m") == [_back()]
