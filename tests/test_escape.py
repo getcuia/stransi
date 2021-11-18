@@ -34,9 +34,15 @@ def _rgb(red, green, blue):
     return ochre.RGB(red / 255, green / 255, blue / 255)
 
 
+# GENERAL
+
+
 def test_escape_has_separator():
     """Ensure the class has a (constant) separator property."""
     assert hasattr(Escape, "SEPARATOR")
+
+
+# VT100
 
 
 @pytest.mark.parametrize(
@@ -53,6 +59,9 @@ def test_escape_has_separator():
 def test_vt100_escapes(text: Text, expected: list[Instruction[Attribute]]):
     """Ensure the classical VT100 escapes are supported."""
     assert _instr(text) == expected
+
+
+# ECMA-48
 
 
 @pytest.mark.parametrize(
@@ -101,6 +110,9 @@ def test_ecma48_default_colors():
     """Ensure the ECMA-48 default colors are supported."""
     assert _instr("\x1B[39m") == [_fore()]
     assert _instr("\x1B[49m") == [_back()]
+
+
+# XTERM
 
 
 @pytest.mark.parametrize(
