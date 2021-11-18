@@ -7,6 +7,8 @@ from typing import Text
 
 import ochre
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from unsi import Escape, SetAttribute, SetColor
 from unsi.attribute import Attribute
@@ -70,6 +72,13 @@ def test_vt100_escapes(text: Text, expected: list[Instruction[Attribute]]):
         ("\x1B[47m", [_back(ochre.Ansi256(7))]),
     ],
 )
-def test_ecma48_8bit_colors(text: Text, expected: list[Instruction[ochre.Color]]):
+def test_ecma48_4bit_colors(text: Text, expected: list[Instruction[ochre.Color]]):
     """Ensure the ECMA-48 colors are supported."""
     assert _instr(text) == expected
+
+
+@given(index=st.integers(min_value=0, max_value=255))
+def test_ecma48_8bit_colors(index: int):
+    """Ensure the ECMA-48 8-bit colors are supported."""
+    assert _instr(f"\x1B[38;5;{index}m") == [_fore(ochre.Ansi256(index))]
+    assert _instr(f"\x1B[48;5;{index}m") == [_back(ochre.Ansi256(index))]

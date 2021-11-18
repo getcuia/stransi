@@ -25,7 +25,7 @@ class Escape(_CustomText):
 
     SEPARATOR = re.compile(r";")
     SUPPORTED_ATTRIBUTE_CODES: set[int] = set(a.value for a in Attribute)
-    SUPPORTED_COLOR_CODES: set[int] = set(range(30, 38)) | set(range(40, 48))
+    SUPPORTED_COLOR_CODES: set[int] = set(range(30, 39)) | set(range(40, 49))
 
     def tokens(self) -> Iterator[Token]:
         """Yield individual tokens from the escape sequence."""
