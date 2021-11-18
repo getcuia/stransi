@@ -3,35 +3,50 @@
 from typing import Text
 
 import ochre
+import pytest
 
 from unsi import Ansi, SetAttribute, SetColor
 from unsi.attribute import Attribute
 from unsi.color import ColorRole
 
 
-def test_ansi_is_a_string():
+@pytest.fixture
+def raw_example() -> Text:
+    """Return a raw example string."""
+    return "\x1b[0;31;1mHello\033[m, \x1B[32mWorld!\N{ESC}[0m"
+
+
+@pytest.fixture
+def example(raw_example: Text) -> Ansi:
+    """Return an example Ansi string."""
+    return Ansi(raw_example)
+
+
+def test_ansi_has_pattern():
+    """Ensure the class has a (constant) pattern property."""
+    assert hasattr(Ansi, "PATTERN")
+
+
+def test_ansi_is_a_string(example: Ansi, raw_example: Text):
     """Ansi is a string."""
-    ansi = Ansi("Hello, world!")
+    assert isinstance(example, Ansi)
+    assert isinstance(example, Text)
 
-    assert isinstance(ansi, Ansi)
-    assert isinstance(ansi, Text)
-    assert ansi == "Hello, world!"
+    assert example == raw_example
 
 
-def test_ansi_can_be_concatenated():
+def test_ansi_can_be_concatenated(example: Ansi, raw_example: Text):
     """Ansi can be concatenated."""
-    ansi = Ansi("Hello, ") + Ansi("world!")
+    double_example = example + example
+    assert double_example == raw_example * 2
 
-    # assert not isinstance(s, Ansi)
-    assert isinstance(ansi, Text)
-    assert ansi == "Hello, world!"
+    # assert not isinstance(double_example, Ansi)
+    assert isinstance(double_example, Text)
 
 
-def test_ansi_can_be_iterated():
+def test_ansi_can_be_iterated(example: Ansi):
     """Ansi can be iterated."""
-    ansi = Ansi("\N{ESC}[0;31;1mHello\x1b[m, \x1B[32mWorld!\N{ESC}[0m")
-
-    assert list(ansi.instructions()) == [
+    assert list(example.instructions()) == [
         SetAttribute(Attribute.NORMAL),
         SetColor(role=ColorRole.FOREGROUND, color=ochre.Ansi256(1)),
         SetAttribute(Attribute.BOLD),
@@ -42,8 +57,3 @@ def test_ansi_can_be_iterated():
         "World!",
         SetAttribute(Attribute.NORMAL),
     ]
-
-
-def test_ansi_has_pattern():
-    """Ensure the class has a (constant) pattern property."""
-    assert hasattr(Ansi, "PATTERN")
