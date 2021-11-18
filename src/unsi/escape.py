@@ -87,6 +87,9 @@ class Escape(_CustomText):
                         raise ValueError(f"Unsupported color spec {color_spec_token!r}")
                 else:
                     # 8-color support
+
+                    # The value of role is the index of the first color in
+                    # the corresponding palette, that's why it works.
                     color = ochre.Ansi256(token.data - role.value)
 
                 yield SetColor(role=role, color=color)
