@@ -15,7 +15,14 @@ class Attribute(Enum):
     # VT100, ECMA-48
     BOLD = 1
     # ECMA-48
-    NOT_BOLD = 22
+    DIM = 2
+    # ECMA-48
+    NEITHER_BOLD_NOR_DIM = 22
+
+    # ECMA-48
+    ITALIC = 3
+    # ECMA-48
+    NOT_ITALIC = 23
 
     # VT100, ECMA-48
     UNDERLINE = 4
@@ -31,6 +38,10 @@ class Attribute(Enum):
     REVERSE = 7
     # ECMA-48
     NOT_REVERSE = 27
+
+    # ECMA-48
+    HIDDEN = 8
+    NOT_HIDDEN = 28
 
 
 @dataclass

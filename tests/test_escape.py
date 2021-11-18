@@ -56,12 +56,25 @@ def test_escape_has_separator():
         ("\033[7m", [SetAttribute(Attribute.REVERSE)]),
     ],
 )
-def test_vt100_escapes(text: Text, expected: list[Instruction[Attribute]]):
-    """Ensure the classical VT100 escapes are supported."""
+def test_vt100_attributes(text: Text, expected: list[Instruction[Attribute]]):
+    """Ensure the classical VT100 attributes are supported."""
     assert _instr(text) == expected
 
 
 # ECMA-48
+
+
+@pytest.mark.parametrize(
+    "text, expected",
+    [
+        ("\x1B[2m", [SetAttribute(Attribute.DIM)]),
+        ("\x1B[3m", [SetAttribute(Attribute.ITALIC)]),
+        ("\x1B[8m", [SetAttribute(Attribute.HIDDEN)]),
+    ],
+)
+def test_ecma48_only_attributes(text: Text, expected: list[Instruction[Attribute]]):
+    """Ensure some ECMA-48-only attributes are supported."""
+    assert _instr(text) == expected
 
 
 @pytest.mark.parametrize(
