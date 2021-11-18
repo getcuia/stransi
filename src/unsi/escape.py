@@ -62,19 +62,35 @@ class Escape(_CustomText):
                 continue
 
             if token.data in self.SUPPORTED_COLOR_CODES:
-                if 30 < token.data < 38:
+                if 30 < token.data < 39:
                     # Foreground colors
                     role = ColorRole.FOREGROUND
-
-                elif 40 < token.data < 48:
+                elif 40 < token.data < 49:
                     # Background colors
                     role = ColorRole.BACKGROUND
 
-                color = ochre.Ansi256(token.data - role.value)
+                if token.data in {38, 48}:
+                    color_spec_token = next(tokens)
+                    if color_spec_token.data == 5:
+                        # 256-color support
+                        color_index_token = next(tokens)
+                        color = ochre.Ansi256(color_index_token.data)
+                    elif color_spec_token.data == 2:
+                        # 24-bit color support
+                        red_token = next(tokens)
+                        green_token = next(tokens)
+                        blue_token = next(tokens)
+                        color = ochre.Ansi24(
+                            red_token.data, green_token.data, blue_token.data
+                        )
+                    else:
+                        raise ValueError(f"Unsupported color spec {color_spec_token!r}")
+                else:
+                    # 8-color support
+                    color = ochre.Ansi256(token.data - role.value)
+
                 yield SetColor(role=role, color=color)
                 continue
-
-            # TODO: support 38/48;2/5
 
             # Unsupported SGR code
             yield Unsupported(token)
