@@ -81,7 +81,9 @@ class Escape(_CustomText):
                         green_token = next(tokens)
                         blue_token = next(tokens)
                         color = ochre.RGB(
-                            red_token.data, green_token.data, blue_token.data
+                            red_token.data / 255,
+                            green_token.data / 255,
+                            blue_token.data / 255,
                         )
                     else:
                         raise ValueError(f"Unsupported color spec {color_spec_token!r}")
