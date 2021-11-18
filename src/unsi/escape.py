@@ -10,8 +10,9 @@ import ochre
 from ._misc import _isplit
 from .attribute import Attribute, SetAttribute
 from .color import ColorRole, SetColor
-from .instruction import Instruction, Unsupported
+from .instruction import Instruction
 from .token import Token
+from .unsupported import Unsupported
 
 
 def isescape(text: Text) -> bool:
@@ -50,8 +51,7 @@ class Escape(Text):
         [SetAttribute(attribute=<Attribute.BOLD: 1>)]
         >>> list(Escape("\x1b[5;44m").instructions())  # doctest: +NORMALIZE_WHITESPACE
         [SetAttribute(attribute=<Attribute.BLINK: 5>),
-         SetColor(role=<ColorRole.BACKGROUND: 40>,
-         color=Ansi256(4))]
+         SetColor(role=<ColorRole.BACKGROUND: 40>, color=Ansi256(4))]
         """
         tokens = self.tokens()
         while token := next(tokens, None):
@@ -79,6 +79,8 @@ class Escape(Text):
                     color=ochre.Ansi256(token.data - ColorRole.BACKGROUND.value),
                 )
                 continue
+
+            # TODO: support 38/48;2/5
 
             # Unsupported SGR code
             yield Unsupported(token)
