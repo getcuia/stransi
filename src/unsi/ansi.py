@@ -5,12 +5,12 @@ from __future__ import annotations
 import re
 from typing import Iterable, Text
 
-from ._misc import _isplit
+from ._misc import _CustomText, _isplit
 from .escape import Escape, isescape
 from .instruction import Instruction
 
 
-class Ansi(Text):
+class Ansi(_CustomText):
     r"""
     A string that can be disassembled into text and ANSI escape sequences.
 
@@ -29,10 +29,6 @@ class Ansi(Text):
     """
 
     PATTERN = re.compile(r"(\N{ESC}\[[\d;]*[a-zA-Z])")
-
-    def __repr__(self) -> Text:
-        """Return a string representation of the object."""
-        return f"{self.__class__.__name__}({super().__repr__()})"
 
     def escapes(self) -> Iterable[Escape | Text]:
         """Yield ANSI escapes and text in the order they appear."""

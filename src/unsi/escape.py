@@ -7,7 +7,7 @@ from typing import Iterable, Iterator, Text
 
 import ochre
 
-from ._misc import _isplit
+from ._misc import _CustomText, _isplit
 from .attribute import Attribute, SetAttribute
 from .color import ColorRole, SetColor
 from .instruction import Instruction
@@ -20,16 +20,11 @@ def isescape(text: Text) -> bool:
     return text.startswith("\N{ESC}[")
 
 
-class Escape(Text):
+class Escape(_CustomText):
     """A single ANSI escape sequence."""
 
     SEPARATOR = re.compile(r";")
     SUPPORTED_ATTRIBUTE_CODES: set[int] = set(a.value for a in Attribute)
-
-    # TODO: should Ansi and Escape inherit from a CustomString?
-    def __repr__(self) -> Text:
-        """Return a string representation of the object."""
-        return f"{self.__class__.__name__}({super().__repr__()})"
 
     def tokens(self) -> Iterator[Token]:
         """Yield individual tokens from the escape sequence."""

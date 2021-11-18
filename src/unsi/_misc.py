@@ -41,3 +41,11 @@ def _isplit(
     # Yield the text after the last separator.
     if piece := text[prev_end:]:
         yield piece
+
+
+class _CustomText(Text):
+    """A custom string type for subclassing."""
+
+    def __repr__(self) -> Text:
+        """Return a string representation of the object."""
+        return f"{self.__class__.__name__}({super().__repr__()})"
