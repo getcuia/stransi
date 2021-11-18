@@ -25,6 +25,7 @@ class Escape(_CustomText):
 
     SEPARATOR = re.compile(r";")
     SUPPORTED_ATTRIBUTE_CODES: set[int] = set(a.value for a in Attribute)
+    SUPPORTED_COLOR_CODES: set[int] = set(range(30, 38)) | set(range(40, 48))
 
     def tokens(self) -> Iterator[Token]:
         """Yield individual tokens from the escape sequence."""
@@ -60,20 +61,17 @@ class Escape(_CustomText):
                 yield SetAttribute(Attribute(token.data))
                 continue
 
-            if 30 < token.data < 38:
-                # Foreground colors
-                yield SetColor(
-                    role=ColorRole.FOREGROUND,
-                    color=ochre.Ansi256(token.data - ColorRole.FOREGROUND.value),
-                )
-                continue
+            if token.data in self.SUPPORTED_COLOR_CODES:
+                if 30 < token.data < 38:
+                    # Foreground colors
+                    role = ColorRole.FOREGROUND
 
-            if 40 < token.data < 48:
-                # Foreground colors
-                yield SetColor(
-                    role=ColorRole.BACKGROUND,
-                    color=ochre.Ansi256(token.data - ColorRole.BACKGROUND.value),
-                )
+                elif 40 < token.data < 48:
+                    # Background colors
+                    role = ColorRole.BACKGROUND
+
+                color = ochre.Ansi256(token.data - role.value)
+                yield SetColor(role=role, color=color)
                 continue
 
             # TODO: support 38/48;2/5
