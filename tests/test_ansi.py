@@ -4,7 +4,8 @@ from typing import Text
 
 import ochre
 
-from unsi import Ansi, Attribute, ColorRole, SetAttribute, SetColor
+from unsi import Ansi, ColorRole, SetAttribute, SetColor
+from unsi.attribute import Attribute
 
 
 def test_ansi_is_a_string():

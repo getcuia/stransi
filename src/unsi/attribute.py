@@ -17,9 +17,6 @@ class Attribute(Enum):
     # ECMA-48
     NOT_BOLD = 22
 
-    # FAINT = auto()
-    # ITALIC = auto()
-
     # VT100, ECMA-48
     UNDERLINE = 4
     # ECMA-48

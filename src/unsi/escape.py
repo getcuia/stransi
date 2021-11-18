@@ -24,7 +24,7 @@ class Escape(Text):
     """A single ANSI escape sequence."""
 
     SEPARATOR = re.compile(r";")
-    SUPPORTED_ATTRIBUTE_CODES: tuple[int, ...] = tuple(a.value for a in Attribute)
+    SUPPORTED_ATTRIBUTE_CODES: set[int] = set(a.value for a in Attribute)
 
     # TODO: should Ansi and Escape inherit from a CustomString?
     def __repr__(self) -> Text:
@@ -49,7 +49,8 @@ class Escape(Text):
         --------
         >>> list(Escape("\x1b[1m").instructions())
         [SetAttribute(attribute=<Attribute.BOLD: 1>)]
-        >>> list(Escape("\x1b[5;44m").instructions())  # doctest: +NORMALIZE_WHITESPACE
+        >>> list(Escape("\x1b[5;44m")
+        ...      .instructions())  # doctest: +NORMALIZE_WHITESPACE
         [SetAttribute(attribute=<Attribute.BLINK: 5>),
          SetColor(role=<ColorRole.BACKGROUND: 40>, color=Ansi256(4))]
         """

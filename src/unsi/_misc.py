@@ -13,7 +13,7 @@ def _isplit(
     Split text into parts separated by the given pattern.
 
     This yields the text before the first match, then the match, then the text
-    after the match and so on. In any case, empty strings are *never* yielded.
+    after the match and so on. Empty strings are *never* yielded.
 
     If `include_separators` is False (the default), separators are not
     included in the result.
@@ -21,10 +21,6 @@ def _isplit(
     Examples
     --------
     >>> list(_isplit('a b  c', ' '))
-    ['a', 'b', 'c']
-    >>> list(_isplit('a b  c', ' ', include_separators=True))
-    ['a', ' ', 'b', ' ', ' ', 'c']
-    >>> list(_isplit('a b  c', r'\s+'))
     ['a', 'b', 'c']
     >>> list(_isplit('a b  c', r'\s+', include_separators=True))
     ['a', ' ', 'b', '  ', 'c']

@@ -47,13 +47,19 @@ from typing import Text
 
 @dataclass
 class Token:
-    """
-    A token is a single ANSI escape.
+    r"""
+    A token is the basic unit of ANSI escape sequences.
 
-    A complete ANSI escape sequence can require multiple tokens.
-    This object is used as a representation of the ANSI escape sequence "language": we
-    can make properties into tokens, and we can make strings into tokens.
-    Furthermore, by having a token, we can make them into compact strings.
+    Examples
+    --------
+    >>> from unsi import Escape
+    >>> list(Escape("\033[38;2;255;0;255m")
+    ...      .tokens())  # doctest: +NORMALIZE_WHITESPACE
+    [Token(kind='m', data=38),
+     Token(kind='m', data=2),
+     Token(kind='m', data=255),
+     Token(kind='m', data=0),
+     Token(kind='m', data=255)]
     """
 
     kind: Text
