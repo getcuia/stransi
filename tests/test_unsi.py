@@ -1,6 +1,6 @@
 """General tests."""
 
-from unsi import __version__
+from stransi import __version__
 
 
 def test_version():

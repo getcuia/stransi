@@ -10,10 +10,10 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from unsi import Escape, SetAttribute, SetColor
-from unsi.attribute import Attribute
-from unsi.color import ColorRole
-from unsi.instruction import Instruction
+from stransi import Escape, SetAttribute, SetColor
+from stransi.attribute import Attribute
+from stransi.color import ColorRole
+from stransi.instruction import Instruction
 
 SINGLE_BYTE = st.integers(min_value=0, max_value=255)
 

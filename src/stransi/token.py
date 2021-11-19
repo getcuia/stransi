@@ -13,7 +13,7 @@ class Token:
 
     Examples
     --------
-    >>> from unsi import Escape
+    >>> from stransi import Escape
     >>> list(Escape("\033[38;2;255;0;255m")
     ...      .tokens())  # doctest: +NORMALIZE_WHITESPACE
     [Token(kind='m', data=38),

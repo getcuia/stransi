@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "unsi"
+name = "stransi"
 version = "0.1.0"
 description = "Parse ANSI escape sequences"
 authors = ["Felipe S. S. Schneider <schneider.felipe@posgrad.ufsc.br>"]

@@ -5,9 +5,9 @@ from typing import Text
 import ochre
 import pytest
 
-from unsi import Ansi, SetAttribute, SetColor
-from unsi.attribute import Attribute
-from unsi.color import ColorRole
+from stransi import Ansi, SetAttribute, SetColor
+from stransi.attribute import Attribute
+from stransi.color import ColorRole
 
 
 @pytest.fixture

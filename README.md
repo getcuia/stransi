@@ -1,4 +1,4 @@
-# unsi
+# stransi
 
 A lightweight parser for ANSI escape code sequences.
 
@@ -10,7 +10,7 @@ A lightweight parser for ANSI escape code sequences.
 -   [x] Only one dependency: `ochre`.
 -   [x] Python 3.8+
 -   [-] Focus on coloring and styling: `SGR` (Select Graphic Rendition)
-    parameters are parsed. unsi understands the following:
+    parameters are parsed. stransi understands the following:
     -   [-] Text styles
     -   [-] Foreground colors
     -   [-] Background colors
