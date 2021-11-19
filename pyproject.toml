@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "A lightweight parser for ANSI escape sequences"
 authors = ["Felipe S. S. Schneider <schneider.felipe@posgrad.ufsc.br>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/getcuia/stransi"
+repository = "https://github.com/getcuia/stransi"
 
 [tool.poetry.dependencies]
 python = "^3.8"
