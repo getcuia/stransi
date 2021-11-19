@@ -1,6 +1,6 @@
 # stransi
 
-A lightweight parser for ANSI escape code sequences.
+A lightweight parser for ANSI escape sequences.
 
 ## Features
 

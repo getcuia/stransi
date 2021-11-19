@@ -1,4 +1,4 @@
-"""A lightweight parser for ANSI escape code sequences."""
+"""A lightweight parser for ANSI escape sequences."""
 
 __version__ = "0.1.0"
 
