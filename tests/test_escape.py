@@ -18,8 +18,8 @@ from stransi.instruction import Instruction
 SINGLE_BYTE = st.integers(min_value=0, max_value=255)
 
 
-def _instr(t):
-    return list(Escape(t).instructions())
+def _instr(text):
+    return list(Escape(text).instructions())
 
 
 def _fore(color: Optional[ochre.Color] = None):
