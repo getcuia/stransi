@@ -1,3 +1,5 @@
+[![Python package](https://github.com/getcuia/stransi/actions/workflows/python-package.yml/badge.svg)](https://github.com/getcuia/stransi/actions/workflows/python-package.yml)
+
 # stransi
 
 A lightweight parser for ANSI escape sequences.
