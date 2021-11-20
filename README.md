@@ -2,7 +2,9 @@
 
 # stransi
 
-A lightweight parser for ANSI escape sequences.
+<img src="https://github.com/getcuia/stransi/raw/main/banner.jpg" alt="stransi" style="width:500px; height:500px; object-fit: fill; border-radius: 100%;" />
+
+> A lightweight parser for ANSI escape sequences.
 
 ## Features
 
@@ -18,3 +20,10 @@ A lightweight parser for ANSI escape sequences.
     -   [-] Background colors
 -   [-] Works with what most ANSI/Unix terminals understand (xterm, Linux
     console, GNOME Terminal, etc.)
+
+## Credits
+
+[Photo](https://github.com/getcuia/stransi/raw/main/banner.jpg) by
+[Rabah Al Shammary](https://unsplash.com/@rabah_shammary?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+on
+[Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
