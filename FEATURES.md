@@ -19,15 +19,15 @@ supported) ANSI escape sequences.
 
 | Status? | Sequence        | Description                              | Colorama? | VT100? | ECMA-48? | XTerm? | Linux? | Windows? |
 | :-----: | :-------------- | :--------------------------------------- | :-------: | :----: | :------: | :----: | :----: | :------: |
-|         | `ESC [ n A`     | Move cursor n lines up                   |    ✔️     |
-|         | `ESC [ n B`     | Move cursor n lines down                 |    ✔️     |
-|         | `ESC [ m C`     | Move cursor m characters forward         |    ✔️     |
-|         | `ESC [ m D`     | Move cursor m characters backward        |    ✔️     |
-|         | `ESC [ n ; m H` | Position cursor at m across, n down      |    ✔️     |
-|         | `ESC [ n ; m f` | Basically the same as `ESC [ n ; m H`    |    ✔️     |
-|         | `ESC [ mode J`  | Clear in screen (cursor moves)           |    ✔️     |
-|         | `ESC [ mode K`  | Clear in line (cursor stays in place)    |    ✔️     |
-|         | `ESC [ param m` | **Select graphic rendition** (see below) |    ✔️     |
+|         | `ESC [ n A`     | Move cursor n lines up                   |    ✔️     |   ✔️   |
+|         | `ESC [ n B`     | Move cursor n lines down                 |    ✔️     |   ✔️   |
+|         | `ESC [ m C`     | Move cursor m characters forward         |    ✔️     |   ✔️   |
+|         | `ESC [ m D`     | Move cursor m characters backward        |    ✔️     |   ✔️   |
+|         | `ESC [ n ; m H` | Position cursor at m across, n down      |    ✔️     |   ✔️   |
+|         | `ESC [ n ; m f` | Basically the same as `ESC [ n ; m H`    |    ✔️     |   ✔️   |
+|         | `ESC [ mode J`  | Clear in screen (cursor stays in place)  |    ✔️     |   ✔️   |
+|         | `ESC [ mode K`  | Clear in line (cursor moves)             |    ✔️     |   ✔️   |
+|         | `ESC [ param m` | **Select graphic rendition** (see below) |    ✔️     |   ✔️   |
 
 Positions default to one, and are relative to the top left corner of the screen.
 Most of these positioning commands have no effect if the cursor is already at
@@ -96,7 +96,7 @@ instructions).
 ## References and specifications
 
 -   [Colorama](https://github.com/tartley/colorama#recognised-ansi-sequences)
--   [VT100](https://vt100.net/docs/vt100-ug/chapter3.html#SGR)
+-   [VT100](https://vt100.net/docs/vt100-ug/chapter3.html)
 -   [ECMA-48](https://www.ecma-international.org/publications-and-standards/standards/ecma-48/)
 -   [XTerm](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html)
 -   [Linux console](https://man7.org/linux/man-pages/man4/console_codes.4.html)
