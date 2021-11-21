@@ -6,7 +6,10 @@
     <img class="hero" src="https://github.com/getcuia/stransi/raw/main/banner.jpg" alt="stransi" width="33%" />
 </div>
 
-> A lightweight parser for ANSI escape sequences.
+> I see a <font color="red">\033[31m</font> door, and I want it painted
+> <font color="black">\033[30m</font>.
+
+stransi is a lightweight parser for ANSI escape sequences.
 
 ## Features
 
