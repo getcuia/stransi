@@ -34,11 +34,11 @@ class Escape(_CustomText):
         """Yield individual tokens from the escape sequence."""
         assert isescape(self), f"{self!r} is not an escape sequence"
         kind = self[-1]
-        if params := self[2:-1]:
-            for param in _isplit(params, self.SEPARATOR):
-                yield Token(kind=kind, data=int(param))
-            return
-        yield Token(kind=kind, data=0)
+        for param in _isplit(self[2:-1], self.SEPARATOR):
+            if not param:
+                yield Token(kind=kind, data=0)
+                continue
+            yield Token(kind=kind, data=int(param))
 
     def instructions(self) -> Iterable[Instruction]:
         r"""
