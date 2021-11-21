@@ -64,26 +64,44 @@ See below for a list of supported parameters.
 
 #### Colors
 
-| Status? | Sequence     | Description            | Colorama? | ECMA-48? | VT100? | XTerm? | Linux? | Windows? |
-| :-----: | :----------- | :--------------------- | :-------: | :------: | :----: | :----: | :----: | :------: |
-|   ✔️    | `ESC [ 30 m` | Black foreground       |    ✔️     |
-|   ✔️    | `ESC [ 31 m` | Red foreground         |    ✔️     |
-|   ✔️    | `ESC [ 32 m` | Green foreground       |    ✔️     |
-|   ✔️    | `ESC [ 33 m` | Yellow foreground      |    ✔️     |
-|   ✔️    | `ESC [ 34 m` | Blue foreground        |    ✔️     |
-|   ✔️    | `ESC [ 35 m` | Magenta foreground     |    ✔️     |
-|   ✔️    | `ESC [ 36 m` | Cyan foreground        |    ✔️     |
-|   ✔️    | `ESC [ 37 m` | White foreground       |    ✔️     |
-|   ✔️    | `ESC [ 39 m` | Reset foreground color |    ✔️     |
-|   ✔️    | `ESC [ 40 m` | Black background       |    ✔️     |
-|   ✔️    | `ESC [ 41 m` | Red background         |    ✔️     |
-|   ✔️    | `ESC [ 42 m` | Green background       |    ✔️     |
-|   ✔️    | `ESC [ 43 m` | Yellow background      |    ✔️     |
-|   ✔️    | `ESC [ 44 m` | Blue background        |    ✔️     |
-|   ✔️    | `ESC [ 45 m` | Magenta background     |    ✔️     |
-|   ✔️    | `ESC [ 46 m` | Cyan background        |    ✔️     |
-|   ✔️    | `ESC [ 47 m` | White background       |    ✔️     |
-|   ✔️    | `ESC [ 49 m` | Reset background color |    ✔️     |
+| Status? | Sequence     | Description                 | Colorama? | ECMA-48? | VT100? | XTerm? | Linux? | Windows? |
+| :-----: | :----------- | :-------------------------- | :-------: | :------: | :----: | :----: | :----: | :------: |
+|   ✔️    | `ESC [ 30 m` | Black foreground            |    ✔️     |
+|   ✔️    | `ESC [ 31 m` | Red foreground              |    ✔️     |
+|   ✔️    | `ESC [ 32 m` | Green foreground            |    ✔️     |
+|   ✔️    | `ESC [ 33 m` | Yellow foreground           |    ✔️     |
+|   ✔️    | `ESC [ 34 m` | Blue foreground             |    ✔️     |
+|   ✔️    | `ESC [ 35 m` | Magenta foreground          |    ✔️     |
+|   ✔️    | `ESC [ 36 m` | Cyan foreground             |    ✔️     |
+|   ✔️    | `ESC [ 37 m` | White foreground            |    ✔️     |
+|   ✔️    |              | 8-bit and 24-bit foreground |           |
+|   ✔️    |              | Bright black foreground     |           |
+|   ✔️    |              | Bright red foreground       |           |
+|   ✔️    |              | Bright green foreground     |           |
+|   ✔️    |              | Bright yellow foreground    |           |
+|   ✔️    |              | Bright blue foreground      |           |
+|   ✔️    |              | Bright magenta foreground   |           |
+|   ✔️    |              | Bright cyan foreground      |           |
+|   ✔️    |              | Bright white foreground     |           |
+|   ✔️    | `ESC [ 39 m` | **Reset foreground color**  |    ✔️     |
+|   ✔️    | `ESC [ 40 m` | Black background            |    ✔️     |
+|   ✔️    | `ESC [ 41 m` | Red background              |    ✔️     |
+|   ✔️    | `ESC [ 42 m` | Green background            |    ✔️     |
+|   ✔️    | `ESC [ 43 m` | Yellow background           |    ✔️     |
+|   ✔️    | `ESC [ 44 m` | Blue background             |    ✔️     |
+|   ✔️    | `ESC [ 45 m` | Magenta background          |    ✔️     |
+|   ✔️    | `ESC [ 46 m` | Cyan background             |    ✔️     |
+|   ✔️    | `ESC [ 47 m` | White background            |    ✔️     |
+|   ✔️    |              | 8-bit and 24-bit background |           |
+|   ✔️    |              | Bright black background     |           |
+|   ✔️    |              | Bright red background       |           |
+|   ✔️    |              | Bright green background     |           |
+|   ✔️    |              | Bright yellow background    |           |
+|   ✔️    |              | Bright blue background      |           |
+|   ✔️    |              | Bright magenta background   |           |
+|   ✔️    |              | Bright cyan background      |           |
+|   ✔️    |              | Bright white background     |           |
+|   ✔️    | `ESC [ 49 m` | **Reset background color**  |    ✔️     |
 
 ### Others
 
