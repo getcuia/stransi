@@ -17,8 +17,8 @@ supported) ANSI escape sequences.
 
 ## CSI (Control Sequence Introducer) sequences
 
-| Status? | Sequence        | Description                              | Colorama? |
-| :-----: | :-------------- | :--------------------------------------- | :-------: |
+| Status? | Sequence        | Description                              | Colorama? | VT100? | ECMA-48? | XTerm? | Linux? | Windows? |
+| :-----: | :-------------- | :--------------------------------------- | :-------: | :----: | :------: | :----: | :----: | :------: |
 |         | `ESC [ n A`     | Move cursor n lines up                   |    ✔️     |
 |         | `ESC [ n B`     | Move cursor n lines down                 |    ✔️     |
 |         | `ESC [ m C`     | Move cursor m characters forward         |    ✔️     |
@@ -47,39 +47,39 @@ See below for a list of supported parameters.
 
 #### Styling attributes
 
-| Status? | Sequence     | Description                  | Colorama? | ECMA-48? | VT100? | XTerm? | Linux? | Windows? |
-| :-----: | :----------- | :--------------------------- | :-------: | :------: | :----: | :----: | :----: | :------: |
-|   ✔️    | `ESC [ 0 m`  | **Reset rendition**          |    ✔️     |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 1 m`  | Bold or extra bright         |    ✔️     |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 2 m`  | Dim or half bright           |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |          |
-|   ✔️    | `ESC [ 3 m`  | Italic text                  |           |    ✔️    |        |   ✔️   |        |          |
-|   ✔️    | `ESC [ 4 m`  | (Singly) underlined text     |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 5 m`  | (Slowly) blinking text       |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |          |
-|   ✔️    | `ESC [ 7 m`  | Reverse (negative) video     |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 8 m`  | Invisible text               |           |    ✔️    |        |   ✔️   |        |          |
-|         | `ESC [ 9 m`  | Strike-through (crossed-out) |           |    ✔️    |        |   ✔️   |        |          |
-|   ✔️    | `ESC [ 22 m` | Reset brightness             |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 23 m` | Reset italic                 |           |    ✔️    |        |   ✔️   |        |          |
-|   ✔️    | `ESC [ 24 m` | Reset underline              |           |    ✔️    |        |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 25 m` | Reset blinking (steady)      |           |    ✔️    |        |   ✔️   |   ✔️   |          |
-|   ✔️    | `ESC [ 27 m` | Reset reverse (positive)     |           |    ✔️    |        |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 28 m` | Reset invisible (visible)    |           |    ✔️    |        |   ✔️   |        |          |
-|         | `ESC [ 29 m` | Reset strike-through         |           |    ✔️    |        |   ✔️   |        |          |
+| Status? | Sequence     | Description                  | Colorama? | VT100? | ECMA-48? | XTerm? | Linux? | Windows? |
+| :-----: | :----------- | :--------------------------- | :-------: | :----: | :------: | :----: | :----: | :------: |
+|   ✔️    | `ESC [ 0 m`  | **Reset rendition**          |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 1 m`  | Bold or extra bright         |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 2 m`  | Dim or half bright           |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |          |
+|   ✔️    | `ESC [ 3 m`  | Italic text                  |           |        |    ✔️    |   ✔️   |        |          |
+|   ✔️    | `ESC [ 4 m`  | (Singly) underlined text     |           |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 5 m`  | (Slowly) blinking text       |           |   ✔️   |    ✔️    |   ✔️   |   ✔️   |          |
+|   ✔️    | `ESC [ 7 m`  | Reverse (negative) video     |           |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 8 m`  | Invisible text               |           |        |    ✔️    |   ✔️   |        |          |
+|         | `ESC [ 9 m`  | Strike-through (crossed-out) |           |        |    ✔️    |   ✔️   |        |          |
+|   ✔️    | `ESC [ 22 m` | Reset brightness             |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 23 m` | Reset italic                 |           |        |    ✔️    |   ✔️   |        |          |
+|   ✔️    | `ESC [ 24 m` | Reset underline              |           |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 25 m` | Reset blinking (steady)      |           |        |    ✔️    |   ✔️   |   ✔️   |          |
+|   ✔️    | `ESC [ 27 m` | Reset reverse (positive)     |           |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 28 m` | Reset invisible (visible)    |           |        |    ✔️    |   ✔️   |        |          |
+|         | `ESC [ 29 m` | Reset strike-through         |           |        |    ✔️    |   ✔️   |        |          |
 
 #### Colors
 
-| Status? | Sequence                     | Description                | Colorama? | ECMA-48? | VT100? | XTerm? | Linux? | Windows? |
-| :-----: | :--------------------------- | :------------------------- | :-------: | :------: | :----: | :----: | :----: | :------: |
-|   ✔️    | `ESC [ 30-37 m`              | 8-color foreground         |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 38 ; 5 ; n m`         | 256-color foreground       |           |    ?     |        |   ✔️   |   ✔️   |
-|   ✔️    | `ESC [ 38 ; 2 ; r ; g ; b m` | RGB color foreground       |           |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 39 m`                 | **Reset foreground color** |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |
-|   ✔️    | `ESC [ 40-47 m`              | 8-color background         |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 48 ; 5 ; n m`         | 256-color background       |           |    ?     |        |   ✔️   |   ✔️   |
-|   ✔️    | `ESC [ 48 ; 2 ; r ; g ; b m` | RGB color background       |           |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 49 m`                 | **Reset background color** |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |
-|   ✔️    | `ESC [ 90-97 m`              | Bright 8-color foreground  |           |          |        |   ✔️   |   ✔️   |
-|   ✔️    | `ESC [ 100-107 m`            | Bright 8-color background  |           |          |        |   ✔️   |   ✔️   |
+| Status? | Sequence                     | Description                | Colorama? | VT100? | ECMA-48? | XTerm? | Linux? | Windows? |
+| :-----: | :--------------------------- | :------------------------- | :-------: | :----: | :------: | :----: | :----: | :------: |
+|   ✔️    | `ESC [ 30-37 m`              | 8-color foreground         |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 38 ; 5 ; n m`         | 256-color foreground       |           |        |    ?     |   ✔️   |   ✔️   |
+|   ✔️    | `ESC [ 38 ; 2 ; r ; g ; b m` | RGB color foreground       |           |        |    ✔️    |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 39 m`                 | **Reset foreground color** |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |
+|   ✔️    | `ESC [ 40-47 m`              | 8-color background         |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 48 ; 5 ; n m`         | 256-color background       |           |        |    ?     |   ✔️   |   ✔️   |
+|   ✔️    | `ESC [ 48 ; 2 ; r ; g ; b m` | RGB color background       |           |        |    ✔️    |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 49 m`                 | **Reset background color** |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |
+|   ✔️    | `ESC [ 90-97 m`              | Bright 8-color foreground  |           |        |          |   ✔️   |   ✔️   |
+|   ✔️    | `ESC [ 100-107 m`            | Bright 8-color background  |           |        |          |   ✔️   |   ✔️   |
 
 The 8-color set are defined in the following order: black, red, green, yellow,
 blue, magenta, cyan, and white.
@@ -96,8 +96,8 @@ instructions).
 ## References and specifications
 
 -   [Colorama](https://github.com/tartley/colorama#recognised-ansi-sequences)
--   [ECMA-48](https://www.ecma-international.org/publications-and-standards/standards/ecma-48/)
 -   [VT100](https://vt100.net/docs/vt100-ug/chapter3.html#SGR)
+-   [ECMA-48](https://www.ecma-international.org/publications-and-standards/standards/ecma-48/)
 -   [XTerm](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html)
--   [linux](https://man7.org/linux/man-pages/man4/console_codes.4.html) (the
-    linux console, that is)
+-   [Linux console](https://man7.org/linux/man-pages/man4/console_codes.4.html)
+-   [Windows console](https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences)
