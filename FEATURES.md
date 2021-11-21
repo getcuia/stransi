@@ -39,15 +39,33 @@ screen), and `2` (entire screen).
 
 ### SGR (Select Graphic Rendition, `m`) sequences
 
+Multiple parameters can be specified, separated by semicolons:
+
+    ESC [ <parameter> ; <parameter> ; ... m
+
+See below for a list of supported parameters.
+
+#### Styling attributes
+
+| Status? | Sequence     | Description              | Colorama? | ECMA-48? | VT100? | XTerm? | Linux? | Windows? |
+| :-----: | :----------- | :----------------------- | :-------: | :------: | :----: | :----: | :----: | :------: |
+|   ✔️    | `ESC [ 0 m`  | **Reset all attributes** |    ✔️     |
+|   ✔️    | `ESC [ 1 m`  | Extra bright or bold     |    ✔️     |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 2 m`  | Half bright or dim       |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
+|   ✔️    |              | Italic text              |           |
+|   ✔️    | `ESC [ 4 m`  | Underlined text          |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 5 m`  | Blinking text            |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 7 m`  | Reverse video            |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 22 m` | Reset brightness         |    ✔️     |
+|   ✔️    |              | Reset italic             |           |
+|   ✔️    |              | Reset underline          |           |
+|   ✔️    |              | Reset blinking           |           |
+|   ✔️    |              | Reset reverse video      |           |
+
+#### Colors
+
 | Status? | Sequence     | Description            | Colorama? | ECMA-48? | VT100? | XTerm? | Linux? | Windows? |
 | :-----: | :----------- | :--------------------- | :-------: | :------: | :----: | :----: | :----: | :------: |
-|   ✔️    | `ESC [ 0 m`  | Reset all attributes   |    ✔️     |
-|   ✔️    | `ESC [ 1 m`  | Extra bright or bold   |    ✔️     |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 2 m`  | Half bright or dim     |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 4 m`  | Underlined text        |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 5 m`  | Blinking text          |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 7 m`  | Reverse video          |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 22 m` | Reset brightness       |    ✔️     |
 |   ✔️    | `ESC [ 30 m` | Black foreground       |    ✔️     |
 |   ✔️    | `ESC [ 31 m` | Red foreground         |    ✔️     |
 |   ✔️    | `ESC [ 32 m` | Green foreground       |    ✔️     |
@@ -66,10 +84,6 @@ screen), and `2` (entire screen).
 |   ✔️    | `ESC [ 46 m` | Cyan background        |    ✔️     |
 |   ✔️    | `ESC [ 47 m` | White background       |    ✔️     |
 |   ✔️    | `ESC [ 49 m` | Reset background color |    ✔️     |
-
-Multiple parameters can be specified, separated by semicolons:
-
-    ESC [ <parameter> ; <parameter> ; ... m
 
 ### Others
 
