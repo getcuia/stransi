@@ -70,21 +70,26 @@ See below for a list of supported parameters.
 | :-----: | :--------------------------- | :------------------------- | :-------: | :------: | :----: | :----: | :----: | :------: |
 |   ✔️    | `ESC [ 30-37 m`              | 8-color foreground         |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
 |   ✔️    | `ESC [ 38 ; 5 ; n m`         | 256-color foreground       |           |
-|   ✔️    | `ESC [ 38 ; 2 ; r ; g ; b m` | RGB color foreground       |           |
+|   ✔️    | `ESC [ 38 ; 2 ; r ; g ; b m` | RGB color foreground       |           |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
 |   ✔️    | `ESC [ 90-97 m`              | Bright 8-color foreground  |           |
 |   ✔️    | `ESC [ 39 m`                 | **Reset foreground color** |    ✔️     |
 |   ✔️    | `ESC [ 40-47 m`              | 8-color background         |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
 |   ✔️    | `ESC [ 48 ; 5 ; n m`         | 256-color background       |           |
-|   ✔️    | `ESC [ 48 ; 2 ; r ; g ; b m` | RGB color background       |           |
+|   ✔️    | `ESC [ 48 ; 2 ; r ; g ; b m` | RGB color background       |           |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
 |   ✔️    | `ESC [ 100-107 m`            | Bright 8-color background  |           |
 |   ✔️    | `ESC [ 49 m`                 | **Reset background color** |    ✔️     |
 
 The 8-color set are defined in the following order: black, red, green, yellow,
 blue, magenta, cyan, and white.
 
-### Others
+### Remarks
 
-All other sequences are ignored and returned as unsupported instructions.
+The supported sequences should work fine in most popular terminal emulators such
+as KDE's Konsole, GNOME Terminal (in fact all libvte-based terminals), and
+iTerm.
+
+All other (unsupported) sequences are "ignored" (returned as unsupported
+instructions).
 
 ## References and specifications
 
