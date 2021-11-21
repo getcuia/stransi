@@ -8,7 +8,11 @@
 
 > I see a `\033[31m` door, and I want it painted `\033[30m`.
 
-stransi is a lightweight parser for ANSI escape sequences.
+stransi is a lightweight parser for
+[ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). It
+implements a string-like type that is aware of its own ANSI escape sequences,
+and can be used to parse most of the common escape sequences used in terminal
+output manipulation.
 
 ## Features
 
@@ -24,6 +28,8 @@ stransi is a lightweight parser for ANSI escape sequences.
     -   [x] Background colors
 -   [x] Works with what most ANSI/Unix terminals understand (xterm, Linux
         console, GNOME Terminal, etc.)
+
+See all the supported ANSI escape sequences in the [FEATURES.md](FEATURES.md).
 
 ## Credits
 
