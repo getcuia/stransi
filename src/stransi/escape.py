@@ -120,4 +120,15 @@ class Escape(_CustomText):
                 yield SetCursor(CursorMove.left(token.data if token.data else 1))
                 continue
 
+            if token.kind in {"H", "f"}:
+                try:
+                    next_data = next(tokens).data
+                except StopIteration:
+                    next_data = 0
+                x = token.data if token.data else 1
+                y = next_data if next_data else 1
+                # ANSI escape sequences are 1-based, but we want 0-based.
+                yield SetCursor(CursorMove.to(x - 1, y - 1))
+                continue
+
             yield Unsupported(token)

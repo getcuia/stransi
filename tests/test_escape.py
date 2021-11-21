@@ -73,6 +73,14 @@ def test_vt100_attributes(text: Text, expected: list[Instruction[Attribute]]):
         ("\033[1B", [SetCursor(CursorMove.down())]),
         ("\033[1C", [SetCursor(CursorMove.right())]),
         ("\033[1D", [SetCursor(CursorMove.left())]),
+        ("\033[H", [SetCursor(CursorMove.to_home())]),
+        ("\033[1H", [SetCursor(CursorMove.to_home())]),
+        ("\033[;1H", [SetCursor(CursorMove.to_home())]),
+        ("\033[1;1H", [SetCursor(CursorMove.to_home())]),
+        ("\033[2H", [SetCursor(CursorMove.to(x=1, y=0))]),
+        # ("\033[;2H", [SetCursor(CursorMove.to(x=0, y=1))]),
+        ("\033[2;2H", [SetCursor(CursorMove.to(x=1, y=1))]),
+        ("\033[f", _instr("\033[H")),
     ],
 )
 def test_vt100_attributes(text: Text, expected: list[Instruction[Attribute]]):
