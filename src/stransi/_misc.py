@@ -13,7 +13,9 @@ def _isplit(
     Split text into parts separated by the given pattern.
 
     This yields the text before the first match, then the match, then the text
-    after the match and so on. Empty strings are *never* yielded.
+    after the match and so on.
+
+    Empty matches are included in the result.
 
     If `include_separators` is False (the default), separators are not
     included in the result.
@@ -21,15 +23,14 @@ def _isplit(
     Examples
     --------
     >>> list(_isplit('a b  c', ' '))
-    ['a', 'b', 'c']
+    ['a', 'b', '', 'c']
     >>> list(_isplit('a b  c', r'\s+', include_separators=True))
     ['a', ' ', 'b', '  ', 'c']
     """
     prev_end = 0
     for separator in re.finditer(pattern, text):
         # Yield the text before separator.
-        if piece := text[prev_end : separator.start()]:
-            yield piece
+        yield text[prev_end : separator.start()]
 
         # Yield separator.
         if include_separators and (piece := separator.group(0)):
@@ -39,8 +40,7 @@ def _isplit(
         prev_end = separator.end()
 
     # Yield the text after the last separator.
-    if piece := text[prev_end:]:
-        yield piece
+    yield text[prev_end:]
 
 
 class _CustomText(Text):
