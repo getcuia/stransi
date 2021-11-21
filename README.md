@@ -34,6 +34,6 @@ See all the supported ANSI escape sequences in the [FEATURES.md](FEATURES.md).
 ## Credits
 
 [Photo](https://github.com/getcuia/stransi/raw/main/banner.jpg) by
-[Rabah Al Shammary](https://unsplash.com/@rabah_shammary?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+[Tien Vu Ngoc](https://unsplash.com/@tienvn3012?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on
 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
