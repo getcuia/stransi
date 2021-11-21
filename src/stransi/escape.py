@@ -9,6 +9,7 @@ import ochre
 
 from ._misc import _CustomText, _isplit
 from .attribute import Attribute, SetAttribute
+from .clear import Clear, SetClear
 from .color import ColorRole, SetColor
 from .cursor import CursorMove, SetCursor
 from .instruction import Instruction
@@ -130,5 +131,31 @@ class Escape(_CustomText):
                 # ANSI escape sequences are 1-based, but we want 0-based.
                 yield SetCursor(CursorMove.to(x - 1, y - 1))
                 continue
+
+            if token.kind == "J":
+                if token.data == 0:
+                    yield SetClear(Clear.SCREEN_AFTER)
+                    continue
+
+                if token.data == 1:
+                    yield SetClear(Clear.SCREEN_BEFORE)
+                    continue
+
+                if token.data == 2:
+                    yield SetClear(Clear.SCREEN)
+                    continue
+
+            if token.kind == "K":
+                if token.data == 0:
+                    yield SetClear(Clear.LINE_AFTER)
+                    continue
+
+                if token.data == 1:
+                    yield SetClear(Clear.LINE_BEFORE)
+                    continue
+
+                if token.data == 2:
+                    yield SetClear(Clear.LINE)
+                    continue
 
             yield Unsupported(token)
