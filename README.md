@@ -1,6 +1,6 @@
 [![Python package](https://github.com/getcuia/stransi/actions/workflows/python-package.yml/badge.svg)](https://github.com/getcuia/stransi/actions/workflows/python-package.yml)
 
-# stransi
+# [stransi](https://github.com/getcuia/stransi#readme)
 
 <div align="center">
     <img class="hero" src="https://github.com/getcuia/stransi/raw/main/banner.jpg" alt="stransi" width="33%" />
