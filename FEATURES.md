@@ -1,6 +1,7 @@
 # Recognized ANSI Sequences
 
-ANSI sequences generally take the form:
+[ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
+generally take the form:
 
     ESC [ <parameter> ; <parameter> ; ... <command>
 
@@ -62,3 +63,12 @@ screen), and `2` (entire screen).
 |   ✔️    | `ESC [ 46 m` | Cyan background        |    ✔️     |
 |   ✔️    | `ESC [ 47 m` | White background       |    ✔️     |
 |   ✔️    | `ESC [ 49 m` | Reset background color |    ✔️     |
+
+Multiple parameters can be specified, separated by semicolons:
+
+    ESC [ <parameter> ; <parameter> ; ... m
+
+### Others
+
+All other sequences are ignored and returned as unsupported instructions.
+
