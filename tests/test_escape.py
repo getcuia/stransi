@@ -10,9 +10,10 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from stransi import Escape, SetAttribute, SetColor
+from stransi import Escape, SetAttribute, SetColor, SetCursor
 from stransi.attribute import Attribute
 from stransi.color import ColorRole
+from stransi.cursor import CursorMove
 from stransi.instruction import Instruction
 
 SINGLE_BYTE = st.integers(min_value=0, max_value=255)
@@ -54,6 +55,24 @@ def test_escape_has_separator():
         ("\033[4m", [SetAttribute(Attribute.UNDERLINE)]),
         ("\033[5m", [SetAttribute(Attribute.BLINK)]),
         ("\033[7m", [SetAttribute(Attribute.REVERSE)]),
+    ],
+)
+def test_vt100_attributes(text: Text, expected: list[Instruction[Attribute]]):
+    """Ensure the classical VT100 attributes are supported."""
+    assert _instr(text) == expected
+
+
+@pytest.mark.parametrize(
+    "text, expected",
+    [
+        ("\033[A", _instr("\033[0A")),
+        ("\033[0A", _instr("\033[1A")),
+        ("\033[1A", [SetCursor(CursorMove.up())]),
+        ("\033[1A", [SetCursor(CursorMove.up(1))]),
+        ("\033[2A", [SetCursor(CursorMove.up(2))]),
+        ("\033[1B", [SetCursor(CursorMove.down())]),
+        ("\033[1C", [SetCursor(CursorMove.right())]),
+        ("\033[1D", [SetCursor(CursorMove.left())]),
     ],
 )
 def test_vt100_attributes(text: Text, expected: list[Instruction[Attribute]]):

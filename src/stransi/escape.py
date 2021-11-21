@@ -10,6 +10,7 @@ import ochre
 from ._misc import _CustomText, _isplit
 from .attribute import Attribute, SetAttribute
 from .color import ColorRole, SetColor
+from .cursor import CursorMove, SetCursor
 from .instruction import Instruction
 from .token import Token
 from .unsupported import Unsupported
@@ -54,56 +55,69 @@ class Escape(_CustomText):
         """
         tokens = self.tokens()
         while token := next(tokens, None):
-            if not token.issgr():
-                # We only support SGR (Select Graphic Rendition)
-                yield Unsupported(token)
-                continue
+            if token.issgr():
+                if token.data in self.ALL_ATTRIBUTE_CODES:
+                    yield SetAttribute(Attribute(token.data))
+                    continue
 
-            if token.data in self.ALL_ATTRIBUTE_CODES:
-                yield SetAttribute(Attribute(token.data))
-                continue
+                if token.data in self.ALL_COLOR_CODES:
+                    if token.data in self.ALL_FOREGROUND_CODES:
+                        role = ColorRole.FOREGROUND
+                    elif token.data in self.ALL_BACKGROUND_CODES:
+                        role = ColorRole.BACKGROUND
 
-            if token.data in self.ALL_COLOR_CODES:
-                if token.data in self.ALL_FOREGROUND_CODES:
-                    role = ColorRole.FOREGROUND
-                elif token.data in self.ALL_BACKGROUND_CODES:
-                    role = ColorRole.BACKGROUND
-
-                if token.data in {38, 48}:
-                    color_spec_token = next(tokens)
-                    if color_spec_token.data == 5:
-                        # 256-color support
-                        color_index_token = next(tokens)
-                        color = ochre.Ansi256(color_index_token.data)
-                    elif color_spec_token.data == 2:
-                        # 24-bit color support
-                        red_token = next(tokens)
-                        green_token = next(tokens)
-                        blue_token = next(tokens)
-                        color = ochre.RGB(
-                            red_token.data / 255,
-                            green_token.data / 255,
-                            blue_token.data / 255,
-                        )
+                    if token.data in {38, 48}:
+                        color_spec_token = next(tokens)
+                        if color_spec_token.data == 5:
+                            # 256-color support
+                            color_index_token = next(tokens)
+                            color = ochre.Ansi256(color_index_token.data)
+                        elif color_spec_token.data == 2:
+                            # 24-bit color support
+                            red_token = next(tokens)
+                            green_token = next(tokens)
+                            blue_token = next(tokens)
+                            color = ochre.RGB(
+                                red_token.data / 255,
+                                green_token.data / 255,
+                                blue_token.data / 255,
+                            )
+                        else:
+                            raise ValueError(
+                                f"Unsupported color spec {color_spec_token!r}"
+                            )
+                    elif token.data in {39, 49}:
+                        # Default color
+                        color = None
                     else:
-                        raise ValueError(f"Unsupported color spec {color_spec_token!r}")
-                elif token.data in {39, 49}:
-                    # Default color
-                    color = None
-                else:
-                    # 8-color support
+                        # 8-color support
 
-                    # The value of role is the index of the first color in
-                    # the corresponding palette, that's why it works.
-                    color_index = token.data - role.value
-                    if token.data >= 90:
-                        # Bright colors
-                        color_index -= 52
+                        # The value of role is the index of the first color in
+                        # the corresponding palette, that's why it works.
+                        color_index = token.data - role.value
+                        if token.data >= 90:
+                            # Bright colors
+                            color_index -= 52
 
-                    color = ochre.Ansi256(color_index)
+                        color = ochre.Ansi256(color_index)
 
-                yield SetColor(role=role, color=color)
+                    yield SetColor(role=role, color=color)
+                    continue
+
+            if token.kind == "A":
+                yield SetCursor(CursorMove.up(token.data if token.data else 1))
                 continue
 
-            # Unsupported SGR code
+            if token.kind == "B":
+                yield SetCursor(CursorMove.down(token.data if token.data else 1))
+                continue
+
+            if token.kind == "C":
+                yield SetCursor(CursorMove.right(token.data if token.data else 1))
+                continue
+
+            if token.kind == "D":
+                yield SetCursor(CursorMove.left(token.data if token.data else 1))
+                continue
+
             yield Unsupported(token)
