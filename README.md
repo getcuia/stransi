@@ -1,4 +1,6 @@
+[![PyPI](https://img.shields.io/pypi/v/stransi)](https://pypi.org/project/stransi/)
 [![Python package](https://github.com/getcuia/stransi/actions/workflows/python-package.yml/badge.svg)](https://github.com/getcuia/stransi/actions/workflows/python-package.yml)
+[![PyPI - License](https://img.shields.io/pypi/l/stransi)](https://github.com/getcuia/stransi/blob/main/LICENSE)
 
 # [stransi](https://github.com/getcuia/stransi#readme) 🖍️
 
