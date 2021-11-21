@@ -18,7 +18,7 @@ output manipulation.
 
 -   ✨ [Good support of ANSI escape sequences](FEATURES.md)
 -   🎨 Focus on coloring and styling
--   🪖 Unsupported `CSI` escape sequences are emitted as tokens
+-   🛡️ Unsupported `CSI` escape sequences are emitted as tokens
 -   🏜️ Only one dependency: [ochre](https://github.com/getcuia/ochre)
 -   🐍 Python 3.8+
 
