@@ -70,16 +70,16 @@ See below for a list of supported parameters.
 
 | Status? | Sequence                     | Description                | Colorama? | VT100? | ECMA-48? | XTerm? | Linux? | Windows? |
 | :-----: | :--------------------------- | :------------------------- | :-------: | :----: | :------: | :----: | :----: | :------: |
-|   ✔️    | `ESC [ 30-37 m`              | 8-color foreground         |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 38 ; 5 ; n m`         | 256-color foreground       |           |        |    ?     |   ✔️   |   ✔️   |
-|   ✔️    | `ESC [ 38 ; 2 ; r ; g ; b m` | RGB color foreground       |           |        |    ✔️    |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 39 m`                 | **Reset foreground color** |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |
-|   ✔️    | `ESC [ 40-47 m`              | 8-color background         |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 48 ; 5 ; n m`         | 256-color background       |           |        |    ?     |   ✔️   |   ✔️   |
-|   ✔️    | `ESC [ 48 ; 2 ; r ; g ; b m` | RGB color background       |           |        |    ✔️    |   ✔️   |   ✔️   |    ?     |
-|   ✔️    | `ESC [ 49 m`                 | **Reset background color** |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |
-|   ✔️    | `ESC [ 90-97 m`              | Bright 8-color foreground  |           |        |          |   ✔️   |   ✔️   |
-|   ✔️    | `ESC [ 100-107 m`            | Bright 8-color background  |           |        |          |   ✔️   |   ✔️   |
+|   ✔️    | `ESC [ 30-37 m`              | 8-color foreground         |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 38 ; 5 ; s m`         | 256-color foreground       |           |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 38 ; 2 ; r ; g ; b m` | RGB color foreground       |           |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 39 m`                 | **Reset foreground color** |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 40-47 m`              | 8-color background         |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 48 ; 5 ; s m`         | 256-color background       |           |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 48 ; 2 ; r ; g ; b m` | RGB color background       |           |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 49 m`                 | **Reset background color** |    ✔️     |        |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 90-97 m`              | Bright 8-color foreground  |           |        |          |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 100-107 m`            | Bright 8-color background  |           |        |          |   ✔️   |   ✔️   |    ✔️    |
 
 The 8-color set are defined in the following order: black, red, green, yellow,
 blue, magenta, cyan, and white.
