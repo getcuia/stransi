@@ -47,22 +47,24 @@ See below for a list of supported parameters.
 
 #### Styling attributes
 
-| Status? | Sequence     | Description               | Colorama? | ECMA-48? | VT100? | XTerm? | Linux? | Windows? |
-| :-----: | :----------- | :------------------------ | :-------: | :------: | :----: | :----: | :----: | :------: |
-|   ✔️    | `ESC [ 0 m`  | **Reset rendition**       |    ✔️     |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 1 m`  | Bold or extra bright      |    ✔️     |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 2 m`  | Dim or half bright        |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |          |
-|   ✔️    | `ESC [ 3 m`  | Italic text               |           |    ✔️    |        |   ✔️   |        |          |
-|   ✔️    | `ESC [ 4 m`  | (Singly) underlined text  |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 5 m`  | (Slowly) blinking text    |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |          |
-|   ✔️    | `ESC [ 7 m`  | Reverse (negative) video  |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 8 m`  | Invisible text            |           |    ✔️    |        |   ✔️   |        |          |
-|   ✔️    | `ESC [ 22 m` | Reset brightness          |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 23 m` | Reset italic              |           |    ✔️    |        |   ✔️   |        |          |
-|   ✔️    | `ESC [ 24 m` | Reset underline           |           |    ✔️    |        |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 25 m` | Reset blinking (steady)   |           |    ✔️    |        |   ✔️   |   ✔️   |          |
-|   ✔️    | `ESC [ 27 m` | Reset reverse (positive)  |           |    ✔️    |        |   ✔️   |   ✔️   |    ✔️    |
-|   ✔️    | `ESC [ 28 m` | Reset invisible (visible) |           |    ✔️    |        |   ✔️   |        |          |
+| Status? | Sequence     | Description                  | Colorama? | ECMA-48? | VT100? | XTerm? | Linux? | Windows? |
+| :-----: | :----------- | :--------------------------- | :-------: | :------: | :----: | :----: | :----: | :------: |
+|   ✔️    | `ESC [ 0 m`  | **Reset rendition**          |    ✔️     |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 1 m`  | Bold or extra bright         |    ✔️     |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 2 m`  | Dim or half bright           |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |          |
+|   ✔️    | `ESC [ 3 m`  | Italic text                  |           |    ✔️    |        |   ✔️   |        |          |
+|   ✔️    | `ESC [ 4 m`  | (Singly) underlined text     |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 5 m`  | (Slowly) blinking text       |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |          |
+|   ✔️    | `ESC [ 7 m`  | Reverse (negative) video     |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 8 m`  | Invisible text               |           |    ✔️    |        |   ✔️   |        |          |
+|         | `ESC [ 9 m`  | Strike-through (crossed-out) |           |    ✔️    |        |   ✔️   |        |          |
+|   ✔️    | `ESC [ 22 m` | Reset brightness             |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 23 m` | Reset italic                 |           |    ✔️    |        |   ✔️   |        |          |
+|   ✔️    | `ESC [ 24 m` | Reset underline              |           |    ✔️    |        |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 25 m` | Reset blinking (steady)      |           |    ✔️    |        |   ✔️   |   ✔️   |          |
+|   ✔️    | `ESC [ 27 m` | Reset reverse (positive)     |           |    ✔️    |        |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ 28 m` | Reset invisible (visible)    |           |    ✔️    |        |   ✔️   |        |          |
+|         | `ESC [ 29 m` | Reset strike-through         |           |    ✔️    |        |   ✔️   |        |          |
 
 #### Colors
 
