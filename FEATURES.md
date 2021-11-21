@@ -19,10 +19,10 @@ supported) ANSI escape sequences.
 
 | Status? | Sequence        | Description                              | Colorama? | VT100? | ECMA-48? | XTerm? | Linux? | Windows? |
 | :-----: | :-------------- | :--------------------------------------- | :-------: | :----: | :------: | :----: | :----: | :------: |
-|         | `ESC [ n A`     | Move cursor n lines up                   |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
-|         | `ESC [ n B`     | Move cursor n lines down                 |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
-|         | `ESC [ m C`     | Move cursor m characters forward         |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
-|         | `ESC [ m D`     | Move cursor m characters backward        |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ n A`     | Move cursor n lines up                   |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ n B`     | Move cursor n lines down                 |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ m C`     | Move cursor m characters forward         |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ m D`     | Move cursor m characters backward        |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
 |         | `ESC [ n ; m H` | Position cursor at m across, n down      |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
 |         | `ESC [ n ; m f` | Basically the same as `ESC [ n ; m H`    |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
 |         | `ESC [ mode J`  | Clear in screen (cursor stays in place)  |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
