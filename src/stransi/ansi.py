@@ -33,6 +33,9 @@ class Ansi(_CustomText):
     def escapes(self) -> Iterable[Escape | Text]:
         """Yield ANSI escapes and text in the order they appear."""
         for match in _isplit(self, self.PATTERN, include_separators=True):
+            if not match:
+                continue
+
             if not isescape(match):
                 yield match
                 continue
