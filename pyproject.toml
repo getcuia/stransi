@@ -7,6 +7,14 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/getcuia/stransi"
 repository = "https://github.com/getcuia/stransi"
+keywords = [
+    "ansi",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
