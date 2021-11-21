@@ -15,6 +15,7 @@ from stransi.attribute import Attribute
 from stransi.color import ColorRole
 from stransi.cursor import CursorMove
 from stransi.instruction import Instruction
+from stransi.token import Token
 
 SINGLE_BYTE = st.integers(min_value=0, max_value=255)
 
@@ -41,6 +42,24 @@ def _rgb(red, green, blue):
 def test_escape_has_separator():
     """Ensure the class has a (constant) separator property."""
     assert hasattr(Escape, "SEPARATOR")
+
+
+def test_defaults_are_zero():
+    """Ensure the default values are zero."""
+    assert list(Escape("\033[H").tokens()) == [Token(kind="H", data=0)]
+    assert list(Escape("\033[1H").tokens()) == [Token(kind="H", data=1)]
+    assert list(Escape("\033[1;H").tokens()) == [
+        Token(kind="H", data=1),
+        Token(kind="H", data=0),
+    ]
+    assert list(Escape("\033[;1H").tokens()) == [
+        Token(kind="H", data=0),
+        Token(kind="H", data=1),
+    ]
+    assert list(Escape("\033[;H").tokens()) == [
+        Token(kind="H", data=0),
+        Token(kind="H", data=0),
+    ]
 
 
 # VT100
