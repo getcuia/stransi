@@ -2,7 +2,9 @@
 
 # stransi
 
-<img src="https://github.com/getcuia/stransi/raw/main/banner.jpg" alt="stransi" style="width:500px; height:500px; object-fit: fill; border-radius: 100%;" />
+<div align="center">
+    <img class="hero" src="https://github.com/getcuia/stransi/raw/main/banner.jpg" alt="stransi" width="33%" />
+</div>
 
 > A lightweight parser for ANSI escape sequences.
 
