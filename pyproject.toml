@@ -8,7 +8,13 @@ readme = "README.md"
 homepage = "https://github.com/getcuia/stransi"
 repository = "https://github.com/getcuia/stransi"
 keywords = [
+    "ansi-colors",
+    "ansi-escape-codes",
     "ansi",
+    "console",
+    "parser",
+    "stransi",
+    "terminal",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
