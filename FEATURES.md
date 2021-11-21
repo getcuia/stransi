@@ -25,8 +25,8 @@ supported) ANSI escape sequences.
 |   ✔️    | `ESC [ m D`     | Move cursor m characters backward        |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
 |   ✔️    | `ESC [ n ; m H` | Position cursor at m across, n down      |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
 |   ✔️    | `ESC [ n ; m f` | Basically the same as `ESC [ n ; m H`    |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
-|         | `ESC [ mode J`  | Clear the screen                         |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
-|         | `ESC [ mode K`  | Clear the current line                   |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ mode J`  | Clear the screen                         |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ mode K`  | Clear the current line                   |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
 |   ✔️    | `ESC [ param m` | **Select graphic rendition** (see below) |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
 
 Positions default to one, and are relative to the top left corner of the screen.
