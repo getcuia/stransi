@@ -102,8 +102,8 @@ def test_vt100_attributes(text: Text, expected: list[Instruction[Attribute]]):
         ("\033[f", _instr("\033[H")),
     ],
 )
-def test_vt100_attributes(text: Text, expected: list[Instruction[Attribute]]):
-    """Ensure the classical VT100 attributes are supported."""
+def test_vt100_cursor_movements(text: Text, expected: list[Instruction[Attribute]]):
+    """Ensure the classical VT100 cursor movements are supported."""
     assert _instr(text) == expected
 
 
