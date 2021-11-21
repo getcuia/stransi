@@ -23,19 +23,19 @@ supported) ANSI escape sequences.
 |   ✔️    | `ESC [ n B`     | Move cursor n lines down                 |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
 |   ✔️    | `ESC [ m C`     | Move cursor m characters forward         |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
 |   ✔️    | `ESC [ m D`     | Move cursor m characters backward        |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
-|         | `ESC [ n ; m H` | Position cursor at m across, n down      |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
-|         | `ESC [ n ; m f` | Basically the same as `ESC [ n ; m H`    |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
-|         | `ESC [ mode J`  | Clear in screen (cursor stays in place)  |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
-|         | `ESC [ mode K`  | Clear in line (cursor moves)             |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
-|         | `ESC [ param m` | **Select graphic rendition** (see below) |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ n ; m H` | Position cursor at m across, n down      |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ n ; m f` | Basically the same as `ESC [ n ; m H`    |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|         | `ESC [ mode J`  | Clear the screen                         |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|         | `ESC [ mode K`  | Clear the current line                   |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
+|   ✔️    | `ESC [ param m` | **Select graphic rendition** (see below) |    ✔️     |   ✔️   |    ✔️    |   ✔️   |   ✔️   |    ✔️    |
 
 Positions default to one, and are relative to the top left corner of the screen.
 Most of these positioning commands have no effect if the cursor is already at
 the edge of the screen.
 
 Clearing functions default to mode `0`, which clears from cursor to the end of
-the screen. Other available modes are: `1` (from cursor to the beginning of the
-screen), and `2` (entire screen).
+the screen or line. Other available modes are: `1` (from cursor to the beginning
+of the screen or line), and `2` (entire screen or line).
 
 ### SGR (Select Graphic Rendition, `m`) sequences
 
