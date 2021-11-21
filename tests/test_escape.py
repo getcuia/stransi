@@ -10,8 +10,9 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from stransi import Escape, SetAttribute, SetColor, SetCursor
+from stransi import Escape, SetAttribute, SetClear, SetColor, SetCursor
 from stransi.attribute import Attribute
+from stransi.clear import Clear
 from stransi.color import ColorRole
 from stransi.cursor import CursorMove
 from stransi.instruction import Instruction
@@ -107,6 +108,24 @@ def test_vt100_attributes(text: Text, expected: list[Instruction[Attribute]]):
 )
 def test_vt100_cursor_movements(text: Text, expected: list[Instruction[Attribute]]):
     """Ensure the classical VT100 cursor movements are supported."""
+    assert _instr(text) == expected
+
+
+@pytest.mark.parametrize(
+    "text, expected",
+    [
+        ("\033[J", _instr("\033[0J")),
+        ("\033[K", _instr("\033[0K")),
+        ("\033[0J", [SetClear(Clear.SCREEN_AFTER)]),
+        ("\033[1J", [SetClear(Clear.SCREEN_BEFORE)]),
+        ("\033[2J", [SetClear(Clear.SCREEN)]),
+        ("\033[0K", [SetClear(Clear.LINE_AFTER)]),
+        ("\033[1K", [SetClear(Clear.LINE_BEFORE)]),
+        ("\033[2K", [SetClear(Clear.LINE)]),
+    ],
+)
+def test_vt100_clear(text: Text, expected: list[Instruction[Attribute]]):
+    """Ensure the classical VT100 clearing escape sequences are supported."""
     assert _instr(text) == expected
 
 
