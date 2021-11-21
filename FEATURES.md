@@ -39,11 +39,14 @@ screen), and `2` (entire screen).
 
 ### SGR (Select Graphic Rendition, `m`) sequences
 
-| Status? | Sequence     | Description            | Colorama? |
-| :-----: | :----------- | :--------------------- | :-------: |
+| Status? | Sequence     | Description            | Colorama? | ECMA-48? | VT100? | XTerm? | Linux? | Windows? |
+| :-----: | :----------- | :--------------------- | :-------: | :------: | :----: | :----: | :----: | :------: |
 |   ✔️    | `ESC [ 0 m`  | Reset all attributes   |    ✔️     |
-|   ✔️    | `ESC [ 1 m`  | Bold/bright            |    ✔️     |
-|   ✔️    | `ESC [ 2 m`  | Dim                    |    ✔️     |
+|   ✔️    | `ESC [ 1 m`  | Extra bright or bold   |    ✔️     |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 2 m`  | Half bright or dim     |    ✔️     |    ✔️    |        |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 4 m`  | Underlined text        |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 5 m`  | Blinking text          |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
+|   ✔️    | `ESC [ 7 m`  | Reverse video          |           |    ✔️    |   ✔️   |   ✔️   |   ✔️   |    ?     |
 |   ✔️    | `ESC [ 22 m` | Reset brightness       |    ✔️     |
 |   ✔️    | `ESC [ 30 m` | Black foreground       |    ✔️     |
 |   ✔️    | `ESC [ 31 m` | Red foreground         |    ✔️     |
@@ -72,3 +75,11 @@ Multiple parameters can be specified, separated by semicolons:
 
 All other sequences are ignored and returned as unsupported instructions.
 
+## References and specifications
+
+-   [Colorama](https://github.com/tartley/colorama#recognised-ansi-sequences)
+-   [ECMA-48](https://www.ecma-international.org/publications-and-standards/standards/ecma-48/)
+-   [VT100](https://vt100.net/docs/vt100-ug/chapter3.html#SGR)
+-   [XTerm](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html)
+-   [linux](https://man7.org/linux/man-pages/man4/console_codes.4.html) (the
+    linux console, that is)
