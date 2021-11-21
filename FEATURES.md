@@ -14,7 +14,21 @@ Only a subset of the ANSI escape sequences are supported by this library. See
 the tables below for a complete list of currently supported (and planned to be
 supported) ANSI escape sequences.
 
-## SGR (Select Graphic Rendition, `m`)
+## CSI (Control Sequence Introducer) sequences
+
+| Status? | Sequence        | Description                              | Colorama? |
+| :-----: | :-------------- | :--------------------------------------- | :-------: |
+|         | `ESC [ n A`     | Move cursor n lines up                   |     ✔️     |
+|         | `ESC [ n B`     | Move cursor n lines down                 |     ✔️     |
+|         | `ESC [ n C`     | Move cursor n characters forward         |     ✔️     |
+|         | `ESC [ n D`     | Move cursor n characters backward        |     ✔️     |
+|         | `ESC [ y;x H`   | Position cursor at x across, y down      |     ✔️     |
+|         | `ESC [ y;x f`   | Position cursor at x across, y down      |     ✔️     |
+|         | `ESC [ mode J`  | Clear the screen                         |     ✔️     |
+|         | `ESC [ mode K`  | Clear the line                           |     ✔️     |
+|         | `ESC [ param m` | **Select graphic rendition** (see below) |     ✔️     |
+
+### SGR (Select Graphic Rendition, `m`) sequences
 
 | Status? | Sequence     | Description            | Colorama? |
 | :-----: | :----------- | :--------------------- | :-------: |
