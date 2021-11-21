@@ -6,8 +6,7 @@
     <img class="hero" src="https://github.com/getcuia/stransi/raw/main/banner.jpg" alt="stransi" width="33%" />
 </div>
 
-> I see a <font color="red">\033[31m</font> door, and I want it painted
-> <font color="black">\033[30m</font>.
+> I see a `\033[31m` door, and I want it painted `\033[30m`.
 
 stransi is a lightweight parser for ANSI escape sequences.
 
