@@ -30,6 +30,40 @@ output manipulation.
 $ pip install stransi
 ```
 
+## Usage
+
+```python
+In [1]: from stransi import Ansi
+
+In [2]: text = Ansi("I see a \033[1;31mred\033[22;39m door, and I want it painted \033[1;30mblack\033[22;39m")
+
+In [3]: list(text.escapes())
+Out[3]:
+['I see a ',
+ Escape('\x1b[1;31m'),
+ 'red',
+ Escape('\x1b[22;39m'),
+ ' door, and I want it painted ',
+ Escape('\x1b[1;30m'),
+ 'black',
+ Escape('\x1b[22;39m')]
+
+In [4]: list(text.instructions())
+Out[4]:
+['I see a ',
+ SetAttribute(attribute=<Attribute.BOLD: 1>),
+ SetColor(role=<ColorRole.FOREGROUND: 30>, color=Ansi256(1)),
+ 'red',
+ SetAttribute(attribute=<Attribute.NEITHER_BOLD_NOR_DIM: 22>),
+ SetColor(role=<ColorRole.FOREGROUND: 30>, color=None),
+ ' door, and I want it painted ',
+ SetAttribute(attribute=<Attribute.BOLD: 1>),
+ SetColor(role=<ColorRole.FOREGROUND: 30>, color=Ansi256(0)),
+ 'black',
+ SetAttribute(attribute=<Attribute.NEITHER_BOLD_NOR_DIM: 22>),
+ SetColor(role=<ColorRole.FOREGROUND: 30>, color=None)]
+```
+
 ## Credits
 
 [Photo](https://github.com/getcuia/stransi/raw/main/banner.jpg) by
