@@ -8,7 +8,8 @@
     <img class="hero" src="https://github.com/getcuia/stransi/raw/main/banner.jpg" alt="stransi" width="33%" />
 </div>
 
-> I see a `\033[31m` door, and I want it painted `\033[30m`.
+> I see a `\033[1;31m`red`\033[22;39m` door, and I want it painted
+> `\033[1;30m`black`\033[22;39m`.
 
 stransi is a lightweight parser for
 [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). It
