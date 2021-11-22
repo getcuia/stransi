@@ -131,7 +131,7 @@ typing-extensions = {version = ">=3.7.4.3", markers = "python_version < \"3.10\"
 
 [[package]]
 name = "hypothesis"
-version = "6.26.0"
+version = "6.27.0"
 description = "A library for property-based testing"
 category = "dev"
 optional = false
@@ -222,7 +222,7 @@ python-versions = "*"
 
 [[package]]
 name = "ochre"
-version = "0.1.0"
+version = "0.1.1"
 description = "A tiny Python package for working with colors in a pragmatic way"
 category = "main"
 optional = false
@@ -504,8 +504,8 @@ gitpython = [
     {file = "GitPython-3.1.24.tar.gz", hash = "sha256:df83fdf5e684fef7c6ee2c02fc68a5ceb7e7e759d08b694088d0cacb4eba59e5"},
 ]
 hypothesis = [
-    {file = "hypothesis-6.26.0-py3-none-any.whl", hash = "sha256:68331058d70ed608ff0d0d067e229e837cd67527583aa330f08a036dbbef7123"},
-    {file = "hypothesis-6.26.0.tar.gz", hash = "sha256:c1d5436410d788c9759164bda6cdee0590c81032b0bd0e8d1fa6c90d5934b082"},
+    {file = "hypothesis-6.27.0-py3-none-any.whl", hash = "sha256:cc1222e1e491c7101f572516d3b37b52cecdc689bc97d4fd860ed3a56d2f7899"},
+    {file = "hypothesis-6.27.0.tar.gz", hash = "sha256:1beddacc1917b272b4b04ce877984c18f5c9930d891614bc02c8a62ebe237285"},
 ]
 isort = [
     {file = "isort-5.10.1-py3-none-any.whl", hash = "sha256:6f62d78e2f89b4500b080fe3a81690850cd254227f27f75c3a0c491a1f351ba7"},
@@ -573,8 +573,8 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
 ochre = [
-    {file = "ochre-0.1.0-py3-none-any.whl", hash = "sha256:823cd0c08adab230287d9435601f5c17030693f96c9b1b2dee9f5d400cebb4d1"},
-    {file = "ochre-0.1.0.tar.gz", hash = "sha256:d431e650e5bd345662c681367f35d2da3c4277a1c8225e5624844b49c69c6185"},
+    {file = "ochre-0.1.1-py3-none-any.whl", hash = "sha256:c6f8ce567e8cdfea16f381131c90ae71e71d5a7a0a81e6ea03d9db0f0ee26d8b"},
+    {file = "ochre-0.1.1.tar.gz", hash = "sha256:c4b19895bb8d1a5b06bb2aac7a68294a7680fd18e53f5fffa00f5318ec2f0b05"},
 ]
 packaging = [
     {file = "packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
@@ -736,6 +736,7 @@ tomli = [
 ]
 typing-extensions = [
     {file = "typing_extensions-4.0.0-py3-none-any.whl", hash = "sha256:829704698b22e13ec9eaf959122315eabb370b0884400e9818334d8b677023d9"},
+    {file = "typing_extensions-4.0.0.tar.gz", hash = "sha256:2cdf80e4e04866a9b3689a51869016d36db0814d84b8d8a568d22781d45d27ed"},
 ]
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
