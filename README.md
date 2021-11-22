@@ -24,6 +24,12 @@ output manipulation.
 -   🏜️ Only one dependency: [ochre](https://github.com/getcuia/ochre)
 -   🐍 Python 3.8+
 
+## Installation
+
+```console
+$ pip install stransi
+```
+
 ## Credits
 
 [Photo](https://github.com/getcuia/stransi/raw/main/banner.jpg) by
