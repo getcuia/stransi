@@ -36,7 +36,10 @@ $ pip install stransi
 ```python
 In [1]: from stransi import Ansi
 
-In [2]: text = Ansi("I see a \033[1;31mred\033[22;39m door, and I want it painted \033[1;30mblack\033[22;39m")
+In [2]: text = Ansi(
+   ...:     "I see a \033[1;31mred\033[22;39m door, "
+   ...:     "and I want it painted \033[1;30mblack\033[22;39m"
+   ...: )
 
 In [3]: list(text.escapes())
 Out[3]:
