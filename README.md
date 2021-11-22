@@ -12,7 +12,7 @@
 > `\033[1;30m`black`\033[22;39m`.
 
 stransi is a lightweight parser for
-[ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). It
+[ANSI escape code sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). It
 implements a string-like type that is aware of its own ANSI escape sequences,
 and can be used to parse most of the common escape sequences used in terminal
 output manipulation.
