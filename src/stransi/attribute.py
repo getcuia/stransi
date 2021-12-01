@@ -43,6 +43,14 @@ class Attribute(Enum):
     HIDDEN = 8
     NOT_HIDDEN = 28
 
+    def is_on(self):
+        """Return True if this attribute actually "turns on" an attribute."""
+        return not self.is_off()
+
+    def is_off(self):
+        """Return True if this attribute actually "turns off" (resets) an attribute."""
+        return self.value >= 22
+
 
 @dataclass
 class SetAttribute(Instruction[Attribute]):
