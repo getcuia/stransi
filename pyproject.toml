@@ -12,6 +12,7 @@ keywords = [
     "ansi-escape-codes",
     "ansi",
     "console",
+    "cuia",
     "parser",
     "stransi",
     "terminal",
