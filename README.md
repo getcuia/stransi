@@ -8,8 +8,8 @@
     <img class="hero" src="https://github.com/getcuia/stransi/raw/main/banner.jpg" alt="stransi" width="33%" />
 </div>
 
-> I see a `\033[1;31m`red`\033[22;39m` door, and I want it painted
-> `\033[1;30m`black`\033[22;39m`.
+> I see a `\033[1;31m`red`\033[;39m` door, and I want it painted
+> `\033[1;30m`black`\033[;39m`.
 
 stransi is a lightweight parser for
 [ANSI escape code sequences](https://en.wikipedia.org/wiki/ANSI_escape_code). It
@@ -37,8 +37,8 @@ $ pip install stransi
 In [1]: from stransi import Ansi
 
 In [2]: text = Ansi(
-   ...:     "I see a \033[1;31mred\033[22;39m door, "
-   ...:     "and I want it painted \033[1;30mblack\033[22;39m"
+   ...:     "I see a \033[1;31mred\033[;39m door, "
+   ...:     "and I want it painted \033[1;30mblack\033[;39m"
    ...: )
 
 In [3]: list(text.escapes())
@@ -46,11 +46,11 @@ Out[3]:
 ['I see a ',
  Escape('\x1b[1;31m'),
  'red',
- Escape('\x1b[22;39m'),
+ Escape('\x1b[;39m'),
  ' door, and I want it painted ',
  Escape('\x1b[1;30m'),
  'black',
- Escape('\x1b[22;39m')]
+ Escape('\x1b[;39m')]
 
 In [4]: list(text.instructions())
 Out[4]:
@@ -58,13 +58,13 @@ Out[4]:
  SetAttribute(attribute=<Attribute.BOLD: 1>),
  SetColor(role=<ColorRole.FOREGROUND: 30>, color=Ansi256(1)),
  'red',
- SetAttribute(attribute=<Attribute.NEITHER_BOLD_NOR_DIM: 22>),
+ SetAttribute(attribute=<Attribute.NORMAL: 0>),
  SetColor(role=<ColorRole.FOREGROUND: 30>, color=None),
  ' door, and I want it painted ',
  SetAttribute(attribute=<Attribute.BOLD: 1>),
  SetColor(role=<ColorRole.FOREGROUND: 30>, color=Ansi256(0)),
  'black',
- SetAttribute(attribute=<Attribute.NEITHER_BOLD_NOR_DIM: 22>),
+ SetAttribute(attribute=<Attribute.NORMAL: 0>),
  SetColor(role=<ColorRole.FOREGROUND: 30>, color=None)]
 ```
 
