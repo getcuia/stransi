@@ -36,7 +36,7 @@ bandit = "^1.7.1"
 pydocstyle = "^6.1.1"
 flake8 = "^4.0.1"
 pylint = "^2.11.1"
-mypy = "^0.910"
+mypy = "^0.920"
 black = {version = "^21.11b0", allow-prereleases = true}
 hypothesis = "^6.31.6"
 
