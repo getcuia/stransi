@@ -30,7 +30,7 @@ def _isplit(
     prev_end = 0
     for separator in re.finditer(pattern, text):
         # Yield the text before separator.
-        yield text[prev_end : separator.start()]
+        yield text[prev_end : separator.start()]  # noqa: E203
 
         # Yield separator.
         if include_separators and (piece := separator.group(0)):

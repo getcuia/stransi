@@ -41,7 +41,7 @@ class Escape(_CustomText):
                 continue
             yield Token(kind=kind, data=int(param))
 
-    def instructions(self) -> Iterable[Instruction]:
+    def instructions(self) -> Iterable[Instruction]:  # noqa: C901
         r"""
         Decode a string of tokens into escapable objects.
 
