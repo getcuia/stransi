@@ -52,7 +52,7 @@ class Escape(_CustomText):
         >>> list(Escape("\x1b[5;44m")
         ...      .instructions())  # doctest: +NORMALIZE_WHITESPACE
         [SetAttribute(attribute=<Attribute.BLINK: 5>),
-         SetColor(role=<ColorRole.BACKGROUND: 40>, color=Ansi256(4))]
+         SetColor(role=<ColorRole.BACKGROUND: 40>, color=Ansi256(code=4))]
         """
         tokens = self.tokens()
         while token := next(tokens, None):

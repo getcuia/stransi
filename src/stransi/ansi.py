@@ -22,7 +22,7 @@ class Ansi(_CustomText):
     >>> list(s.instructions())  # doctest: +NORMALIZE_WHITESPACE
     [SetAttribute(attribute=<Attribute.BOLD: 1>),
      SetColor(role=<ColorRole.FOREGROUND: 30>,
-     color=Ansi256(1)),
+     color=Ansi256(code=1)),
      'Hello',
      SetAttribute(attribute=<Attribute.NORMAL: 0>),
      ', world!']
