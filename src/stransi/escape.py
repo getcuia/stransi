@@ -68,16 +68,16 @@ class Escape(_CustomText):
                         role = ColorRole.BACKGROUND
 
                     if token.data in {38, 48}:
-                        color_spec_token = next(tokens)
+                        color_spec_token = next(tokens, None)
                         if color_spec_token.data == 5:
                             # 256-color support
-                            color_index_token = next(tokens)
+                            color_index_token = next(tokens, None)
                             color = ochre.Ansi256(color_index_token.data)
                         elif color_spec_token.data == 2:
                             # 24-bit color support
-                            red_token = next(tokens)
-                            green_token = next(tokens)
-                            blue_token = next(tokens)
+                            red_token = next(tokens, None)
+                            green_token = next(tokens, None)
+                            blue_token = next(tokens, None)
                             color = ochre.RGB(
                                 red_token.data / 255,
                                 green_token.data / 255,
