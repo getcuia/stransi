@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "stransi"
-version = "0.2.0"
+version = "0.3.0"
 description = "A lightweight parser for ANSI escape sequences"
 authors = ["Felipe S. S. Schneider <schneider.felipe@posgrad.ufsc.br>"]
 license = "MIT"
