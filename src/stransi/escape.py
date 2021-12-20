@@ -68,25 +68,42 @@ class Escape(_CustomText):
                         role = ColorRole.BACKGROUND
 
                     if token.data in {38, 48}:
-                        color_spec_token = next(tokens, None)
+                        if not (color_spec_token := next(tokens, None)):
+                            yield Unsupported(token)
+                            continue
                         if color_spec_token.data == 5:
                             # 256-color support
-                            color_index_token = next(tokens, None)
+                            if not (color_index_token := next(tokens, None)):
+                                yield Unsupported(token)
+                                yield Unsupported(color_spec_token)
+                                continue
                             color = ochre.Ansi256(color_index_token.data)
                         elif color_spec_token.data == 2:
                             # 24-bit color support
-                            red_token = next(tokens, None)
-                            green_token = next(tokens, None)
-                            blue_token = next(tokens, None)
+                            if not (red_token := next(tokens, None)):
+                                yield Unsupported(token)
+                                yield Unsupported(color_spec_token)
+                                continue
+                            if not (green_token := next(tokens, None)):
+                                yield Unsupported(token)
+                                yield Unsupported(color_spec_token)
+                                yield Unsupported(red_token)
+                                continue
+                            if not (blue_token := next(tokens, None)):
+                                yield Unsupported(token)
+                                yield Unsupported(color_spec_token)
+                                yield Unsupported(red_token)
+                                yield Unsupported(green_token)
+                                continue
                             color = ochre.RGB(
                                 red_token.data / 255,
                                 green_token.data / 255,
                                 blue_token.data / 255,
                             )
                         else:
-                            raise ValueError(
-                                f"Unsupported color spec {color_spec_token!r}"
-                            )
+                            yield Unsupported(token)
+                            yield Unsupported(color_spec_token)
+                            continue
                     elif token.data in {39, 49}:
                         # Default color
                         color = None

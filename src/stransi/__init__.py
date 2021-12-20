@@ -4,7 +4,15 @@
 __version__ = "0.2.0"
 
 
-__all__ = ["Ansi", "Escape", "SetAttribute", "SetClear", "SetColor", "SetCursor"]
+__all__ = [
+    "Ansi",
+    "Escape",
+    "SetAttribute",
+    "SetClear",
+    "SetColor",
+    "SetCursor",
+    "Unsupported",
+]
 
 
 from .ansi import Ansi
@@ -13,3 +21,4 @@ from .clear import SetClear
 from .color import SetColor
 from .cursor import SetCursor
 from .escape import Escape
+from .unsupported import Unsupported

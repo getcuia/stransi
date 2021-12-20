@@ -10,7 +10,7 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from stransi import Escape, SetAttribute, SetClear, SetColor, SetCursor
+from stransi import Escape, SetAttribute, SetClear, SetColor, SetCursor, Unsupported
 from stransi.attribute import Attribute
 from stransi.clear import Clear
 from stransi.color import ColorRole
@@ -61,6 +61,56 @@ def test_defaults_are_zero():
         Token(kind="H", data=0),
         Token(kind="H", data=0),
     ]
+
+
+@pytest.mark.parametrize(
+    "text, expected",
+    [
+        ("\033[38m", [Unsupported(Token(kind="m", data=38))]),
+        ("\033[48m", [Unsupported(Token(kind="m", data=48))]),
+        (
+            "\033[38;0m",
+            [
+                Unsupported(Token(kind="m", data=38)),
+                Unsupported(Token(kind="m", data=0)),
+            ],
+        ),
+        (
+            "\033[38;5m",
+            [
+                Unsupported(Token(kind="m", data=38)),
+                Unsupported(Token(kind="m", data=5)),
+            ],
+        ),
+        (
+            "\033[38;2m",
+            [
+                Unsupported(Token(kind="m", data=38)),
+                Unsupported(Token(kind="m", data=2)),
+            ],
+        ),
+        (
+            "\033[38;2;0m",
+            [
+                Unsupported(Token(kind="m", data=38)),
+                Unsupported(Token(kind="m", data=2)),
+                Unsupported(Token(kind="m", data=0)),
+            ],
+        ),
+        (
+            "\033[38;2;0;0m",
+            [
+                Unsupported(Token(kind="m", data=38)),
+                Unsupported(Token(kind="m", data=2)),
+                Unsupported(Token(kind="m", data=0)),
+                Unsupported(Token(kind="m", data=0)),
+            ],
+        ),
+    ],
+)
+def test_faulty_escapes(text, expected):
+    """Ensure some invalid escapes are handled gracefully."""
+    assert _instr(text) == expected
 
 
 # VT100
