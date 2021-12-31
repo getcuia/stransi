@@ -38,7 +38,7 @@ flake8 = "^4.0.1"
 pylint = "^2.11.1"
 mypy = "^0.930"
 black = {version = "^21.11b0", allow-prereleases = true}
-hypothesis = "^6.33.0"
+hypothesis = "^6.34.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
