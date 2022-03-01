@@ -32,7 +32,7 @@ ochre = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.0"
-bandit = "^1.7.2"
+bandit = "^1.7.3"
 pydocstyle = "^6.1.1"
 flake8 = "^4.0.1"
 pylint = "^2.11.1"
