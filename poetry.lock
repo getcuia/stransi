@@ -105,6 +105,17 @@ python-versions = ">=2.7, !=3.0.*"
 graph = ["objgraph (>=1.7.2)"]
 
 [[package]]
+name = "exceptiongroup"
+version = "1.0.0rc8"
+description = "Backport of PEP 654 (exception groups)"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+test = ["pytest (>=6)"]
+
+[[package]]
 name = "flake8"
 version = "4.0.1"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -142,7 +153,7 @@ typing-extensions = {version = ">=3.7.4.3", markers = "python_version < \"3.10\"
 
 [[package]]
 name = "hypothesis"
-version = "6.47.0"
+version = "6.47.2"
 description = "A library for property-based testing"
 category = "dev"
 optional = false
@@ -150,6 +161,7 @@ python-versions = ">=3.7"
 
 [package.dependencies]
 attrs = ">=19.2.0"
+exceptiongroup = {version = ">=1.0.0rc8", markers = "python_version < \"3.11.0b1\""}
 sortedcontainers = ">=2.1.0,<3.0.0"
 
 [package.extras]
@@ -462,7 +474,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "5080667a0f4d06723fd0c566fc9a14efd59165aa62b63f4001fc274fa756ce1b"
+content-hash = "3cdb9a87bbd014f571921be08d205ac146bfbc19fd6c510dc355dcebb3109a3d"
 
 [metadata.files]
 astroid = [
@@ -518,6 +530,10 @@ dill = [
     {file = "dill-0.3.4-py2.py3-none-any.whl", hash = "sha256:7e40e4a70304fd9ceab3535d36e58791d9c4a776b38ec7f7ec9afc8d3dca4d4f"},
     {file = "dill-0.3.4.zip", hash = "sha256:9f9734205146b2b353ab3fec9af0070237b6ddae78452af83d2fca84d739e675"},
 ]
+exceptiongroup = [
+    {file = "exceptiongroup-1.0.0rc8-py3-none-any.whl", hash = "sha256:ab0a968e1ef769e55d9a596f4a89f7be9ffedbc9fdefdb77cc68cf5c33ce1035"},
+    {file = "exceptiongroup-1.0.0rc8.tar.gz", hash = "sha256:6990c24f06b8d33c8065cfe43e5e8a4bfa384e0358be036af9cc60b6321bd11a"},
+]
 flake8 = [
     {file = "flake8-4.0.1-py2.py3-none-any.whl", hash = "sha256:479b1304f72536a55948cb40a32dce8bb0ffe3501e26eaf292c7e60eb5e0428d"},
     {file = "flake8-4.0.1.tar.gz", hash = "sha256:806e034dda44114815e23c16ef92f95c91e4c71100ff52813adf7132a6ad870d"},
@@ -531,8 +547,8 @@ gitpython = [
     {file = "GitPython-3.1.24.tar.gz", hash = "sha256:df83fdf5e684fef7c6ee2c02fc68a5ceb7e7e759d08b694088d0cacb4eba59e5"},
 ]
 hypothesis = [
-    {file = "hypothesis-6.47.0-py3-none-any.whl", hash = "sha256:76a7d16f78b5691db34ef87fa677d020dd86189f6b748adf801088743b66c889"},
-    {file = "hypothesis-6.47.0.tar.gz", hash = "sha256:dd88c57f45032fc3d84596e426d8e3d67f88eda2d8a2d96a5697def036a7e0c7"},
+    {file = "hypothesis-6.47.2-py3-none-any.whl", hash = "sha256:d6a7bb1b695edc57388b86960138d23aeddcb95192cff49755e280e3296558c9"},
+    {file = "hypothesis-6.47.2.tar.gz", hash = "sha256:9c01a225eada7d74d38430e3e91e659e3a892fbc2b15f7b051779ded6ab73ee7"},
 ]
 iniconfig = [
     {file = "iniconfig-1.1.1-py2.py3-none-any.whl", hash = "sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3"},
