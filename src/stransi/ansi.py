@@ -28,7 +28,7 @@ class Ansi(_CustomText):
      ', world!']
     """
 
-    PATTERN = re.compile(r"(\N{ESC}\[[\d;]*[a-zA-Z])")
+    PATTERN = re.compile(r"(\N{ESC}\[\??[\d;]*[a-zA-Z])")
 
     def escapes(self) -> Iterable[Escape | Text]:
         """Yield ANSI escapes and text in the order they appear."""
