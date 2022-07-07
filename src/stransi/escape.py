@@ -11,7 +11,7 @@ from ._misc import _CustomText, _isplit
 from .attribute import Attribute, SetAttribute
 from .clear import Clear, SetClear
 from .color import ColorRole, SetColor
-from .cursor import CursorMove, SetCursor
+from .cursor import CursorMove, SetCursor, CursorVisibilityChange, SetCursorVisibility
 from .instruction import Instruction
 from .token import Token
 from .unsupported import Unsupported
