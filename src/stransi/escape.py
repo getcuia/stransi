@@ -56,6 +56,10 @@ class Escape(_CustomText):
         """
         tokens = self.tokens()
         while token := next(tokens, None):
+            if token.data == -25:
+                yield SetCursorVisibility(CursorVisibilityChange(token.kind == 'h'))
+                continue
+
             if token.issgr():
                 if token.data in self.ALL_ATTRIBUTE_CODES:
                     yield SetAttribute(Attribute(token.data))
