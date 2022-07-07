@@ -39,7 +39,7 @@ class Escape(_CustomText):
             if not param:
                 yield Token(kind=kind, data=0)
                 continue
-            yield Token(kind=kind, data=int(param))
+            yield Token(kind=kind, data=int(param.replace('?', '-')))
 
     def instructions(self) -> Iterable[Instruction]:  # noqa: C901
         r"""
