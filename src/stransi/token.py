@@ -25,6 +25,8 @@ class Token:
 
     kind: Text
     data: int
+    is_private: bool = False
+    private_designator: str = ""
 
     def issgr(self) -> bool:
         """

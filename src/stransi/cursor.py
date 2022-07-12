@@ -58,3 +58,27 @@ class SetCursor(Instruction[CursorMove]):
     """Instruction to set the cursor position."""
 
     move: CursorMove
+
+
+@dataclass
+class CursorVisibility:
+    """A single cursor visibility change."""
+
+    visible: bool = True
+
+    @staticmethod
+    def show() -> CursorVisibility:
+        """Show the cursor."""
+        return CursorVisibility(visible=True)
+
+    @staticmethod
+    def hide() -> CursorVisibility:
+        """Hide the cursor."""
+        return CursorVisibility(visible=False)
+
+
+@dataclass
+class SetCursorVisibility(Instruction[CursorVisibility]):
+    """Instruction to set the cursor position."""
+
+    change: CursorVisibility
