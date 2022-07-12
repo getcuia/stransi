@@ -39,7 +39,17 @@ class Escape(_CustomText):
             if not param:
                 yield Token(kind=kind, data=0)
                 continue
-            yield Token(kind=kind, data=int(param.replace('?', '-')))
+
+            if param.startswith("?"):
+                data = int(param[1:])
+                is_private = True
+                private_designator = "?"
+            else:
+                data = int(param)
+                is_private = False
+                private_designator = ""
+
+            yield Token(kind=kind, data=data, is_private=is_private, private_designator=private_designator)
 
     def instructions(self) -> Iterable[Instruction]:  # noqa: C901
         r"""
@@ -56,127 +66,130 @@ class Escape(_CustomText):
         """
         tokens = self.tokens()
         while token := next(tokens, None):
-            if token.data == -25:
-                yield SetCursorVisibility(CursorVisibilityChange(token.kind == 'h'))
-                continue
-
-            if token.issgr():
-                if token.data in self.ALL_ATTRIBUTE_CODES:
-                    yield SetAttribute(Attribute(token.data))
+            if token_is_private:
+                if token.data == 25 and token.private_designator == "?":
+                    yield SetCursorVisibility(CursorVisibilityChange(token.kind == 'h'))
                     continue
+                else:
+                    yield Unsupported(token)
+            else:
+                if token.issgr():
+                    if token.data in self.ALL_ATTRIBUTE_CODES:
+                        yield SetAttribute(Attribute(token.data))
+                        continue
 
-                if token.data in self.ALL_COLOR_CODES:
-                    if token.data in self.ALL_FOREGROUND_CODES:
-                        role = ColorRole.FOREGROUND
-                    elif token.data in self.ALL_BACKGROUND_CODES:
-                        role = ColorRole.BACKGROUND
+                    if token.data in self.ALL_COLOR_CODES:
+                        if token.data in self.ALL_FOREGROUND_CODES:
+                            role = ColorRole.FOREGROUND
+                        elif token.data in self.ALL_BACKGROUND_CODES:
+                            role = ColorRole.BACKGROUND
 
-                    if token.data in {38, 48}:
-                        if not (color_spec_token := next(tokens, None)):
-                            yield Unsupported(token)
-                            continue
-                        if color_spec_token.data == 5:
-                            # 256-color support
-                            if not (color_index_token := next(tokens, None)):
+                        if token.data in {38, 48}:
+                            if not (color_spec_token := next(tokens, None)):
+                                yield Unsupported(token)
+                                continue
+                            if color_spec_token.data == 5:
+                                # 256-color support
+                                if not (color_index_token := next(tokens, None)):
+                                    yield Unsupported(token)
+                                    yield Unsupported(color_spec_token)
+                                    continue
+                                color = ochre.Ansi256(color_index_token.data)
+                            elif color_spec_token.data == 2:
+                                # 24-bit color support
+                                if not (red_token := next(tokens, None)):
+                                    yield Unsupported(token)
+                                    yield Unsupported(color_spec_token)
+                                    continue
+                                if not (green_token := next(tokens, None)):
+                                    yield Unsupported(token)
+                                    yield Unsupported(color_spec_token)
+                                    yield Unsupported(red_token)
+                                    continue
+                                if not (blue_token := next(tokens, None)):
+                                    yield Unsupported(token)
+                                    yield Unsupported(color_spec_token)
+                                    yield Unsupported(red_token)
+                                    yield Unsupported(green_token)
+                                    continue
+                                color = ochre.RGB(
+                                    red_token.data / 255,
+                                    green_token.data / 255,
+                                    blue_token.data / 255,
+                                )
+                            else:
                                 yield Unsupported(token)
                                 yield Unsupported(color_spec_token)
                                 continue
-                            color = ochre.Ansi256(color_index_token.data)
-                        elif color_spec_token.data == 2:
-                            # 24-bit color support
-                            if not (red_token := next(tokens, None)):
-                                yield Unsupported(token)
-                                yield Unsupported(color_spec_token)
-                                continue
-                            if not (green_token := next(tokens, None)):
-                                yield Unsupported(token)
-                                yield Unsupported(color_spec_token)
-                                yield Unsupported(red_token)
-                                continue
-                            if not (blue_token := next(tokens, None)):
-                                yield Unsupported(token)
-                                yield Unsupported(color_spec_token)
-                                yield Unsupported(red_token)
-                                yield Unsupported(green_token)
-                                continue
-                            color = ochre.RGB(
-                                red_token.data / 255,
-                                green_token.data / 255,
-                                blue_token.data / 255,
-                            )
+                        elif token.data in {39, 49}:
+                            # Default color
+                            color = None
                         else:
-                            yield Unsupported(token)
-                            yield Unsupported(color_spec_token)
-                            continue
-                    elif token.data in {39, 49}:
-                        # Default color
-                        color = None
-                    else:
-                        # 8-color support
+                            # 8-color support
 
-                        # The value of role is the index of the first color in
-                        # the corresponding palette, that's why it works.
-                        color_index = token.data - role.value
-                        if token.data >= 90:
-                            # Bright colors
-                            color_index -= 52
+                            # The value of role is the index of the first color in
+                            # the corresponding palette, that's why it works.
+                            color_index = token.data - role.value
+                            if token.data >= 90:
+                                # Bright colors
+                                color_index -= 52
 
-                        color = ochre.Ansi256(color_index)
+                            color = ochre.Ansi256(color_index)
 
-                    yield SetColor(role=role, color=color)
+                        yield SetColor(role=role, color=color)
+                        continue
+
+                if token.kind == "A":
+                    yield SetCursor(CursorMove.up(token.data if token.data else 1))
                     continue
 
-            if token.kind == "A":
-                yield SetCursor(CursorMove.up(token.data if token.data else 1))
-                continue
-
-            if token.kind == "B":
-                yield SetCursor(CursorMove.down(token.data if token.data else 1))
-                continue
-
-            if token.kind == "C":
-                yield SetCursor(CursorMove.right(token.data if token.data else 1))
-                continue
-
-            if token.kind == "D":
-                yield SetCursor(CursorMove.left(token.data if token.data else 1))
-                continue
-
-            if token.kind in {"H", "f"}:
-                try:
-                    next_data = next(tokens).data
-                except StopIteration:
-                    next_data = 0
-                x = token.data if token.data else 1
-                y = next_data if next_data else 1
-                # ANSI escape sequences are 1-based, but we want 0-based.
-                yield SetCursor(CursorMove.to(x - 1, y - 1))
-                continue
-
-            if token.kind == "J":
-                if token.data == 0:
-                    yield SetClear(Clear.SCREEN_AFTER)
+                if token.kind == "B":
+                    yield SetCursor(CursorMove.down(token.data if token.data else 1))
                     continue
 
-                if token.data == 1:
-                    yield SetClear(Clear.SCREEN_BEFORE)
+                if token.kind == "C":
+                    yield SetCursor(CursorMove.right(token.data if token.data else 1))
                     continue
 
-                if token.data == 2:
-                    yield SetClear(Clear.SCREEN)
+                if token.kind == "D":
+                    yield SetCursor(CursorMove.left(token.data if token.data else 1))
                     continue
 
-            if token.kind == "K":
-                if token.data == 0:
-                    yield SetClear(Clear.LINE_AFTER)
+                if token.kind in {"H", "f"}:
+                    try:
+                        next_data = next(tokens).data
+                    except StopIteration:
+                        next_data = 0
+                    x = token.data if token.data else 1
+                    y = next_data if next_data else 1
+                    # ANSI escape sequences are 1-based, but we want 0-based.
+                    yield SetCursor(CursorMove.to(x - 1, y - 1))
                     continue
 
-                if token.data == 1:
-                    yield SetClear(Clear.LINE_BEFORE)
-                    continue
+                if token.kind == "J":
+                    if token.data == 0:
+                        yield SetClear(Clear.SCREEN_AFTER)
+                        continue
 
-                if token.data == 2:
-                    yield SetClear(Clear.LINE)
-                    continue
+                    if token.data == 1:
+                        yield SetClear(Clear.SCREEN_BEFORE)
+                        continue
 
-            yield Unsupported(token)
+                    if token.data == 2:
+                        yield SetClear(Clear.SCREEN)
+                        continue
+
+                if token.kind == "K":
+                    if token.data == 0:
+                        yield SetClear(Clear.LINE_AFTER)
+                        continue
+
+                    if token.data == 1:
+                        yield SetClear(Clear.LINE_BEFORE)
+                        continue
+
+                    if token.data == 2:
+                        yield SetClear(Clear.LINE)
+                        continue
+
+                yield Unsupported(token)
