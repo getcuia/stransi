@@ -34,7 +34,7 @@ ochre = "^0.4.0"
 pytest = "^7.1"
 bandit = "^1.7.4"
 pydocstyle = "^6.1.1"
-flake8 = "^4.0.1"
+flake8 = "^5.0.4"
 pylint = "^2.14.4"
 mypy = "^0.961"
 black = {version = "^22.6", allow-prereleases = true}
